@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.lanchitour.android.taobrokerage.MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/mainview"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/edit_url"
+                tools:text="Input Url"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="浏览"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/edit_url"
+                android:layout_toRightOf="@+id/edit_url"
+                android:layout_toEndOf="@+id/edit_url"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:id="@+id/bt_go"
+                android:layout_alignBottom="@+id/edit_url" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1">
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mainwebview"
+                android:layout_below="@+id/edit_url"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="3.19">
+
+            </WebView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:text="阿里妈妈"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bt_tao"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="后退"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bt_back"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="个人"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bt_person"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="前进"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bt_forward"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="淘宝"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bt_home"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
