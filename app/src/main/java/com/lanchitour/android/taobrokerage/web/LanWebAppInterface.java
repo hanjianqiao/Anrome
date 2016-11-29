@@ -235,7 +235,7 @@ public class LanWebAppInterface {
         int len = 0;
         URL url = new URL(urlPath);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Cookie", "acw_tc=AQAAAIvAn2clNgkAve7Yfd6e20C+wlyo; XSRF-TOKEN=eyJpdiI6InN6U2dcL0ZvdGUzRmRGa3VZYlF2a2JRPT0iLCJ2YWx1ZSI6Ijd3YWg5TTNibkFxQVwvOXNyU1VOSXFQRXUycVNsWWRTUmZ2Q2lmTFdZaThtUkw5cnZqeHhhVmY2bktmSVkrUjBtV2ZpeXF1bytySUY1V0hjcWM5anA2Zz09IiwibWFjIjoiODUyY2E3ZmYxM2ZkMjdmYzM2MjRmMDJiMTUxMDMzN2YxZjhkOWIxMTBiMmIxZWEzMmRlNzFhN2QxMmI3ZjFhMyJ9; taokezhushou_plugin=eyJpdiI6IlhFNmhpeXM1OWsyTXIreGo5VHFlUmc9PSIsInZhbHVlIjoibkQwVGZaXC9zTHhBUTAyc2xPenkrc1h6SUVnaFI2S1EzbHFlRTJLa0ZwUGZhblwvK0JQb2FDS1hDZkxqRWY3bXZJenpFZXQ1V2pkY2ZJSERaaGdzSjBvQT09IiwibWFjIjoiY2EwNjVlNWMzODAwYzg2NjA4OWY2MTMxY2U0Zjg2MzlkN2U4MzA1MTA1ZWE0Y2IwNjgyMmJmNTExNjdkZmYyZiJ9; Hm_lvt_ea87033f35cb5b58a4cb26c5f661b891=1478748722,1478752689; Hm_lpvt_ea87033f35cb5b58a4cb26c5f661b891=1478758347");
+        conn.setRequestProperty("Cookie", "taokezhushou_plugin=eyJpdiI6IkNteUtiQnlyV1NYNUdvTWx2Y3p4Z2c9PSIsInZhbHVlIjoiNmQyNEREdDZNXC8zcDBtWllwemxCS2RkNm1SdWlcLzk2SzRURTRRWlI2WDlVZVRsZFNpMVB0XC8rcFFMT2ltUXRZa1wvUWxoczRuZUVZUGlVdTU3VEV3Nm5BPT0iLCJtYWMiOiIyMDQxYTZkZDc3MmQ3OTUyZTY5Yjc1NDI1NTM5ODQ5ZTEwMjE4N2RhOGNkZjkwNmY4ZDk1Y2MwYTM4NzI0YmU0In0%3D;");
         InputStream inStream = conn.getInputStream();
         while ((len = inStream.read(data)) != -1) {
             outStream.write(data, 0, len);
@@ -244,7 +244,7 @@ public class LanWebAppInterface {
         String str =  new String(outStream.toByteArray());//通过out.Stream.toByteArray获取到写的数据
         JSONObject jObject = new JSONObject(str);
         //Log.d("webview", urlPath);
-        //Log.d("WebView", str);
+        Log.d("WebView", str);
         if(jObject.getJSONArray("data").length() == 0) return "<table width=\"100%\" border=\"1\"><caption>没有优惠券</caption><tr style=\"background: #fe2641; color:#fff;\"><th>优惠券</th><th>使用时间</th><th>手机券</th></tr>";;
         JSONArray ja = jObject.getJSONArray("data");
         ret = "<table width=\"100%\" border=\"1\"><caption>店铺优惠券</caption><tr style=\"background: #fe2641; color:#fff;\"><th>优惠券</th><th>使用时间</th><th>手机券</th></tr>";
