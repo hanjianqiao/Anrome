@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>商城</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="detail.css">
+    <!-- rem设置 -->
+    <script type="text/javascript">
+		var scale = 1 / devicePixelRatio;
+		document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+		document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+
+
+
+    </script>
+</head>
+
+<body>
+<!-- 布局 -->
+<section class="page">
+    <div class="detail-box">
+        <img id="introimg" src="" alt="">
+        <p class="price_a" id="intro">
+        </p>
+        <div style="width:94%; margin: 0 auto;">
+            <p class="price_b">
+                <span>¥</span>
+                <span class="font01" id="price"></span>
+            </p>
+            <p class="price_c">
+                <span>月销<a href="" id="sells"></a>件</span>
+            </p>
+        </div>
+        <div class="priceBox" style="padding:0.25rem 0 0.15rem 0.04rem;">
+            <img src="youhui.png" class="copylink">
+            <span style="font-size:0.32rem;vertical-align: bottom;">复制链接，查询优惠券</span>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br>
+    <div class="thw-detail-panel gray-bottom">
+        <a id="copylink" href="clipboard:hello">
+            <button class="btn_left">复制链接</button>
+        </a>
+        <a id="taodetail" href="">
+            <button>查看商品</button>
+        </a>
+    </div>
+    <!-- guide  CON -->
+    <div class="guide-box">
+    </div>
+</section>
+<script type="text/javascript" src="lan_1.js"></script>
+</body>
+</html>

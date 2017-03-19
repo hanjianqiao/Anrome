@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customborder0"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/user_toolbar_back"
+            style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.12"
+            android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/ic_navi_back"
+            android:drawablePadding="2dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="8dp"
+            android:text="个人中心"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/user_textview_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="用户中心"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/user_bt_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.10"
+            android:background="@android:color/transparent"
+            android:text="注册"
+            android:textAlignment="center"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/webview_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
