@@ -21,12 +21,13 @@ public class SelfSearch extends Fragment {
     public static final String ARG_KEY = "item";
     public WebView mainView;
     private String key = "";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         key = getArguments().getString(ARG_KEY);
-        View v = (View)inflater.inflate(R.layout.self_layout_search, container, false);
+        View v = inflater.inflate(R.layout.self_layout_search, container, false);
         Button bt_back = (Button) v.findViewById(R.id.self_search_bt_back);
 
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +36,7 @@ public class SelfSearch extends Fragment {
                 getActivity().onBackPressed();
             }
         });
-        mainView = (WebView)v.findViewById(R.id.webview_self_search);
+        mainView = (WebView) v.findViewById(R.id.webview_self_search);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);

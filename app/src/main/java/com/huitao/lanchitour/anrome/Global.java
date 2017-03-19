@@ -22,6 +22,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 
 public class Global {
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     public static int version = 4;
     public static MainActivity m;
     public static String username = "";
@@ -33,7 +34,6 @@ public class Global {
     public static int endDay = 0;
     public static int newMessage = 0;
     public static ScheduledFuture<?> beeperHandle;
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     public static String regUserName = "";
     public static String regPassword = "";
     public static String regCode = "";
@@ -45,7 +45,7 @@ public class Global {
     public static BottomNavigationItem self;
     public static BottomNavigationItem user;
 
-    public static boolean isVip(){
+    public static boolean isVip() {
         Calendar calendar = Calendar.getInstance();
         boolean Y = (endYear > calendar.get(Calendar.YEAR));
         boolean YE = (endYear == calendar.get(Calendar.YEAR));
@@ -54,11 +54,12 @@ public class Global {
         boolean D = (endDay > calendar.get(Calendar.DAY_OF_MONTH));
         return Y || (YE && M) || (YE && ME && D);
     }
+
     public static void start(final MainActivity m) {
         Global.m = m;
         final Runnable beeper = new Runnable() {
             public void run() {
-                if(!Global.isLoggedIn){
+                if (!Global.isLoggedIn) {
                     return;
                 }
                 JSONObject jsonData = new JSONObject();
@@ -71,7 +72,7 @@ public class Global {
                 }
                 JSONObject jo = PostGetJson.httpPostGet("http://user.hanjianqiao.cn:30000/check", jsonData.toString());
                 try {
-                    if(jo.getString("status").equals( "ok"))
+                    if (jo.getString("status").equals("ok"))
                         if (jo.getString("message").equals("yes")) {
                             Global.newMessage = 1;
                             Message message = m.mHandler.obtainMessage(0);
@@ -89,7 +90,8 @@ public class Global {
 //            public void run() { beeperHandle.cancel(true); }
 //        }, 60 * 60, SECONDS);
     }
-    public static void stop(){
+
+    public static void stop() {
         beeperHandle.cancel(true);
     }
 }

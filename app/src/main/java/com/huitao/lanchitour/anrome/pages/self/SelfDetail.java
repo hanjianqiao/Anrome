@@ -22,13 +22,14 @@ public class SelfDetail extends Fragment {
     public static final String ARG_GOOD_ID = "item";
     public WebView mainView;
     private String goodId = "";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         goodId = getArguments().getString(ARG_GOOD_ID);
-        Log.d("WebView", "good id: "+goodId);
-        View v = (View)inflater.inflate(R.layout.self_layout_detail, container, false);
+        Log.d("WebView", "good id: " + goodId);
+        View v = inflater.inflate(R.layout.self_layout_detail, container, false);
         Button bt_back = (Button) v.findViewById(R.id.self_detail_bt_back);
 
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +38,7 @@ public class SelfDetail extends Fragment {
                 getActivity().onBackPressed();
             }
         });
-        mainView = (WebView)v.findViewById(R.id.webview_self_detail);
+        mainView = (WebView) v.findViewById(R.id.webview_self_detail);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);

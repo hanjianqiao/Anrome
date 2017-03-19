@@ -16,28 +16,32 @@ import java.net.URLDecoder;
 public class ShopTaobaoWebViewClient extends WebViewClient {
 
     private MainActivity m;
-    public ShopTaobaoWebViewClient(MainActivity m){
+
+    public ShopTaobaoWebViewClient(MainActivity m) {
         this.m = m;
     }
+
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
-        if(url.startsWith("intent")){
+        if (url.startsWith("intent")) {
             String decodedUrl = URLDecoder.decode(url);
             String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
             view.loadUrl(newUrl);
-        }else if(view.getUrl().startsWith("http://e22a.com/")){
+        } else if (view.getUrl().startsWith("http://e22a.com/")) {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
             return true;
         }
         return false;
     }
+
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        Log.d("WebView","onPageStarted:" + url);
+        Log.d("WebView", "onPageStarted:" + url);
     }
+
     public void onPageFinished(WebView view, String url) {
- //       final WebView tV = view;
+        //       final WebView tV = view;
         //view.loadUrl("javascript:"+ LanJS.getFromAssets(c));
         super.onPageFinished(view, url);
 //        tV.post(new Runnable() {
@@ -47,6 +51,6 @@ public class ShopTaobaoWebViewClient extends WebViewClient {
 //            }
 //        });
         //c.tv_url.setText(url, TextView.BufferType.NORMAL);
-        Log.d("WebView","onPageFinished:" + url);
+        Log.d("WebView", "onPageFinished:" + url);
     }
 }

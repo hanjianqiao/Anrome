@@ -22,12 +22,13 @@ public class ShopKuaitao extends Fragment {
     public static final String ARG_URL = "item";
     private WebView mainView;
     private String target = "";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         target = getArguments().getString(ARG_URL);
-        View v = (View) inflater.inflate(R.layout.shop_layout_kuaitao, container, false);
+        View v = inflater.inflate(R.layout.shop_layout_kuaitao, container, false);
         Button bt_back = (Button) v.findViewById(R.id.shop_kuaitao_bt_back);
         Button bt_copy_token = (Button) v.findViewById(R.id.shop_kuaitao_bt_copy_token);
 
@@ -44,7 +45,7 @@ public class ShopKuaitao extends Fragment {
                 mainView.post(new Runnable() {
                     @Override
                     public void run() {
-                        mainView.loadUrl("javascript:copyToken('"+target+"')");
+                        mainView.loadUrl("javascript:copyToken('" + target + "')");
                     }
                 });
             }
@@ -65,7 +66,7 @@ public class ShopKuaitao extends Fragment {
         mainView.setScaleX(1.0f);
 
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
-        mainView.setWebViewClient(new TaobaoKuaitaoWebViewClient((MainActivity)getActivity(), target));
+        mainView.setWebViewClient(new TaobaoKuaitaoWebViewClient((MainActivity) getActivity(), target));
         mainView.setInitialScale(25);
         mainView.loadUrl(target);
 

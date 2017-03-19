@@ -22,16 +22,17 @@ public class TaobaoMain extends Fragment {
     public static final String ARG_ITEM = "item";
     private WebView mainView;
     private String target = "";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         target = getArguments().getString(ARG_ITEM);
-        View v = (View)inflater.inflate(R.layout.taobao_layout_main, container, false);
-        ImageButton bt_home = (ImageButton)v.findViewById(R.id.taobao_bt_home);
-        ImageButton bt_back = (ImageButton)v.findViewById(R.id.taobao_bt_back);
-        ImageButton bt_forward = (ImageButton)v.findViewById(R.id.taobao_bt_forward);
-        ImageButton bt_kuaitao = (ImageButton)v.findViewById(R.id.taobao_bt_kuaitao);
+        View v = inflater.inflate(R.layout.taobao_layout_main, container, false);
+        ImageButton bt_home = (ImageButton) v.findViewById(R.id.taobao_bt_home);
+        ImageButton bt_back = (ImageButton) v.findViewById(R.id.taobao_bt_back);
+        ImageButton bt_forward = (ImageButton) v.findViewById(R.id.taobao_bt_forward);
+        ImageButton bt_kuaitao = (ImageButton) v.findViewById(R.id.taobao_bt_kuaitao);
 
         bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +45,7 @@ public class TaobaoMain extends Fragment {
             public void onClick(View view) {
                 Bundle args = new Bundle();
                 args.putString(TaobaoKuaitao.ARG_URL, mainView.getUrl());
-                Log.d("WebView", "Will kuaitao: "+ mainView.getUrl());
+                Log.d("WebView", "Will kuaitao: " + mainView.getUrl());
                 TaobaoKuaitao f = new TaobaoKuaitao();
                 f.setArguments(args);
                 ((MainActivity) getActivity()).showFragment(f);
@@ -53,7 +54,7 @@ public class TaobaoMain extends Fragment {
         bt_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mainView.canGoBack()){
+                if (mainView.canGoBack()) {
                     mainView.goBack();
                 }
             }
@@ -61,13 +62,13 @@ public class TaobaoMain extends Fragment {
         bt_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mainView.canGoForward()){
+                if (mainView.canGoForward()) {
                     mainView.goForward();
                 }
             }
         });
 
-        mainView = (WebView)v.findViewById(R.id.webview_taobao);
+        mainView = (WebView) v.findViewById(R.id.webview_taobao);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);

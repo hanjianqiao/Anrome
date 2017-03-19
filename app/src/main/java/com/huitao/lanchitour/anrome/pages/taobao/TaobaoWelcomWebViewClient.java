@@ -16,32 +16,33 @@ import java.net.URLDecoder;
 
 public class TaobaoWelcomWebViewClient extends WebViewClient {
     private MainActivity m;
-    public TaobaoWelcomWebViewClient(MainActivity m){
+
+    public TaobaoWelcomWebViewClient(MainActivity m) {
         this.m = m;
     }
+
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
         url = URLDecoder.decode(url);
-        if(url.startsWith("http")) {
+        if (url.startsWith("http")) {
             //view.loadUrl(url);
-        }else if(url.startsWith("intent")){
+        } else if (url.startsWith("intent")) {
             String newUrl = url.substring(url.indexOf("http"), url.indexOf(";end"));
             view.loadUrl(newUrl);
             return false;
-        }else if(url.startsWith("http://e22a.com/")){
+        } else if (url.startsWith("http://e22a.com/")) {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
             return false;
-        }else if(url.startsWith("ios:?q=")){
+        } else if (url.startsWith("ios:?q=")) {
             Log.d("WebView", url);
             String newUrl = "";
-            if(url.startsWith("ios:?q=http://")){
+            if (url.startsWith("ios:?q=http://")) {
                 newUrl = url.substring(7);
-            }
-            else if(url.startsWith("ios:?q=https://")){
+            } else if (url.startsWith("ios:?q=https://")) {
                 newUrl = url.substring(7);
-            }else{
-                newUrl = "https://s.m.taobao.com/h5"+url.substring(4);
+            } else {
+                newUrl = "https://s.m.taobao.com/h5" + url.substring(4);
             }
             //view.loadUrl(newUrl);
             Bundle args = new Bundle();
@@ -53,13 +54,15 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
         }
         return true;
     }
+
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        if (!url.endsWith("index.html")){
+        if (!url.endsWith("index.html")) {
             view.stopLoading();
         }
-        Log.d("WebView","onPageStarted:" + url);
+        Log.d("WebView", "onPageStarted:" + url);
     }
+
     public void onPageFinished(WebView view, String url) {
 //        final WebView tV = view;
         //view.loadUrl("javascript:"+ LanJS.getFromAssets(c));
@@ -71,6 +74,6 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
 //            }
 //        });
         //c.tv_url.setText(url, TextView.BufferType.NORMAL);
-        Log.d("WebView","onPageFinished:" + url);
+        Log.d("WebView", "onPageFinished:" + url);
     }
 }

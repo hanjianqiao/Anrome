@@ -15,6 +15,9 @@
         var scale = 1 / devicePixelRatio;
         document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
         document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+
+
+
     </script>
     <style media="screen">
     /*---清空默认样式---*/
@@ -46,115 +49,118 @@
       .link{
         width: 3.8rem; height: 0.72rem; margin: 0.68rem auto 0; text-align: center; line-height: 0.72rem; font-size:0.4rem; background: #fe2641; color:#fff; border-radius:8px;
       }
+
+
+
     </style>
 </head>
 <body>
 <!-- 内容 开始 -->
 <div style="width: 95%; height: auto; margin: 0 auto;padding: 0.55rem 0; background: #fff; text-align: center; ">
-<!-- top 1 -->
-<p class="text-p">
-<span  class="span01">通用佣金比例：</span>
-<span  class="span02" id="genbrorate">??%</span>
-</p>
-<!-- top 2-->
-<p class="text-p">
-<span  class="span01">30天推广：</span>
-<span  class="span02"><strong id="days30sell">??</strong>件</span>
-</p>
-<!-- top 3-->
-<p class="text-p">
-<span class="span01">支出佣金：</span>
-<span  class="span02"><strong id="givebro">??</strong>元</span>
-</p>
-<!-- top 4-->
-<p class="text-p">
-<span  class="span01">鹊桥佣金比例：</span>
-<span  class="span02" id="queqiaorate">0%</span>
-</p>
-<!-- 生成推广链接 -->
-<a id="genlick" href="#">
-  <button class="link" >
-    生成推广链接
-  </button>
-</a>
-<!-- 计划详情表格 -->
-<div style="width: 93%; margin: 0.8rem auto 0; ">
-<table class="table_style" id="plantable">
- <caption id="plantitle">计划详情</caption>
- <!-- 第1行 -->
- <tr style="background: #fe2641; color:#fff; font-size:0.3rem ">
-  <th>计划名称</th>
-  <th>人工审核</th>
-  <th>佣金比例</th>
-  <th>申请计划</th>
- </tr>
- <!-- 第2行 
- <tr >
-  <td>通用计划</td>
-  <td>否</td>
-  <td style="color:#fe2641">5.3%</td>
-  <td>
-    <a href="">
-    <button class="btn_02">
-      申请计划
-    </button>
-  </a>
-  </td>
- </tr>
- -->
-</table>
-</div>
+    <!-- top 1 -->
+    <p class="text-p">
+        <span class="span01">通用佣金比例：</span>
+        <span class="span02" id="genbrorate">??%</span>
+    </p>
+    <!-- top 2-->
+    <p class="text-p">
+        <span class="span01">30天推广：</span>
+        <span class="span02"><strong id="days30sell">??</strong>件</span>
+    </p>
+    <!-- top 3-->
+    <p class="text-p">
+        <span class="span01">支出佣金：</span>
+        <span class="span02"><strong id="givebro">??</strong>元</span>
+    </p>
+    <!-- top 4-->
+    <p class="text-p">
+        <span class="span01">鹊桥佣金比例：</span>
+        <span class="span02" id="queqiaorate">0%</span>
+    </p>
+    <!-- 生成推广链接 -->
+    <a id="genlick" href="#">
+        <button class="link">
+            生成推广链接
+        </button>
+    </a>
+    <!-- 计划详情表格 -->
+    <div style="width: 93%; margin: 0.8rem auto 0; ">
+        <table class="table_style" id="plantable">
+            <caption id="plantitle">计划详情</caption>
+            <!-- 第1行 -->
+            <tr style="background: #fe2641; color:#fff; font-size:0.3rem ">
+                <th>计划名称</th>
+                <th>人工审核</th>
+                <th>佣金比例</th>
+                <th>申请计划</th>
+            </tr>
+            <!-- 第2行
+            <tr >
+             <td>通用计划</td>
+             <td>否</td>
+             <td style="color:#fe2641">5.3%</td>
+             <td>
+               <a href="">
+               <button class="btn_02">
+                 申请计划
+               </button>
+             </a>
+             </td>
+            </tr>
+            -->
+        </table>
+    </div>
 
-<!-- 高佣金推广活动（新鹊桥）表格
-<div style="width: 93%; margin: 0.6rem auto; ">
-<table class="table_style" id="queqiaotable">
- <caption id="queqiaotitle">高佣金推广活动（新鹊桥）</caption>
- <!-- 第1行 
- <tr style="background: #fe2641; color:#fff; font-size:0.3rem ">
-  <th>计划名称</th>
-  <th>剩余天数</th>
-  <th>实得佣金比例</th>
-  <th>操作</th>
- </tr>-->
- <!-- 第2行 
- <tr >
-  <td>高佣金推广...</td>
-  <td>21天</td>
-    <td  style="color:#fe2641">38.28%</td>
-  <td>
-    <a href="">
-    <button class="btn_02" >
-查看计划
-    </button>
-  </a>
-  </td>
- </tr>
- -->
-</table>
+    <!-- 高佣金推广活动（新鹊桥）表格
+    <div style="width: 93%; margin: 0.6rem auto; ">
+    <table class="table_style" id="queqiaotable">
+     <caption id="queqiaotitle">高佣金推广活动（新鹊桥）</caption>
+     <!-- 第1行
+     <tr style="background: #fe2641; color:#fff; font-size:0.3rem ">
+      <th>计划名称</th>
+      <th>剩余天数</th>
+      <th>实得佣金比例</th>
+      <th>操作</th>
+     </tr>-->
+    <!-- 第2行
+    <tr >
+     <td>高佣金推广...</td>
+     <td>21天</td>
+       <td  style="color:#fe2641">38.28%</td>
+     <td>
+       <a href="">
+       <button class="btn_02" >
+   查看计划
+       </button>
+     </a>
+     </td>
+    </tr>
+    -->
+    </table>
 </div>
 
 <!-- 优惠券表格 -->
 <div style="width: 93%; margin: 0 auto; ">
-<table class="table_style" id="coupontable">
- <caption id="coupontitle">优惠券</caption>
- <!-- 第1行 -->
- <tr style="background: #fe2641; color:#fff; font-size:0.3rem ">
-  <th>优惠券</th>
-  <th>到期时间</th>
-  <th>手机券</th>
- </tr>
- <!-- 第2行 
- <tr >
-  <td>满100减<span  style="color:#fe2641">10</span>元</td>
-  <td>10月20日 - 11月15日</td>
-  <td>
-    <button class="btn_02">
-点击复制
-    </button>
-  </td>
- </tr>
- -->
-</table>
+    <table class="table_style" id="coupontable">
+        <caption id="coupontitle">优惠券</caption>
+        <!-- 第1行 -->
+        <tr style="background: #fe2641; color:#fff; font-size:0.3rem ">
+            <th>优惠券</th>
+            <th>到期时间</th>
+            <th>手机券</th>
+        </tr>
+        <!-- 第2行
+        <tr >
+         <td>满100减<span  style="color:#fe2641">10</span>元</td>
+         <td>10月20日 - 11月15日</td>
+         <td>
+           <button class="btn_02">
+       点击复制
+           </button>
+         </td>
+        </tr>
+        -->
+    </table>
 </div>
 
 </div>

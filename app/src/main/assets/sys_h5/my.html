@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>小牛快淘</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta content="telephone=no, address=no" name="format-detection">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<!-- rem设置 -->
-	<script type="text/javascript">
+    <title>小牛快淘</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- rem设置 -->
+    <script type="text/javascript">
 		var scale = 1 / devicePixelRatio;
 		document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
 		document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
-	</script>
-	<style>
+
+
+
+    </script>
+    <style>
 	html{height:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
 	body{font-family:"Helvetica Neue",Helvetica,STHeiTi,sans-serif;height:100%;margin:0;padding:0;color:#3d3d3d;font-size:.14rem;background:#f7f7f7}
 	img{border:0}
@@ -37,65 +40,69 @@
 	.navList{display: block; float: left; width: 25%;  padding-top: 0.2rem; text-align: center;}
 	.navList img{width: 0.39rem; height: 0.38rem;}
 	.navList p{ font-size: 0.26rem; margin:0.1rem 0; }
-	</style>
+
+
+
+    </style>
 </head>
 
 <body>
 <section>
-	<div class="topBox">
-		<a id="user_link" href="login.html">
-			<img id="user_image" src="toux.png" alt="">
-			<p id="user_count" class="titleStyle">点击登录快淘账号</p>
-		</a>
-	</div>
+    <div class="topBox">
+        <a id="user_link" href="login.html">
+            <img id="user_image" src="toux.png" alt="">
+            <p id="user_count" class="titleStyle">点击登录快淘账号</p>
+        </a>
+    </div>
 
-	<a id="vip_link" href="vip01.html">
-	<div class="centerBill">
-			<img src="iconc01.png" alt="" class="imgAgent02">
-			<span class="fl color01">VIP会员服务</span>
-			<img src="iconc06.png" alt="" class="imgAgent03 fr">
-	</div>
-	</a>
+    <a id="vip_link" href="vip01.html">
+        <div class="centerBill">
+            <img src="iconc01.png" alt="" class="imgAgent02">
+            <span class="fl color01">VIP会员服务</span>
+            <img src="iconc06.png" alt="" class="imgAgent03 fr">
+        </div>
+    </a>
 
-	<a id="agent_link" href="agent.html">
-	<div class="centerBill">
-			<img src="iconc02.png" alt="" class="imgAgent02">
-			<span class="fl color01">代理中心</span>
-			<img src="iconc06.png" alt="" class="imgAgent03 fr">
-	</div>
-	</a>
+    <a id="agent_link" href="agent.html">
+        <div class="centerBill">
+            <img src="iconc02.png" alt="" class="imgAgent02">
+            <span class="fl color01">代理中心</span>
+            <img src="iconc06.png" alt="" class="imgAgent03 fr">
+        </div>
+    </a>
 
-	<a id="newcomer_link" href="newcomer.html">
-	<div class="centerBill">
-			<img src="iconc03.png" alt="" class="imgAgent02">
-			<span class="fl color01">新手引导</span>
-			<img src="iconc06.png" alt="" class="imgAgent03 fr">
-	</div>
-	</a>
+    <a id="newcomer_link" href="newcomer.html">
+        <div class="centerBill">
+            <img src="iconc03.png" alt="" class="imgAgent02">
+            <span class="fl color01">新手引导</span>
+            <img src="iconc06.png" alt="" class="imgAgent03 fr">
+        </div>
+    </a>
 
-	<a id="message_link" href="message.html">
-	<div class="centerBill" style="border-bottom:1px solid #f7f7f7; margin-bottom:0">
-			<img src="iconc04.png" alt="" class="imgAgent02">
-			<span class="fl color01">系统消息<span id="new_message" style="color:red; display:none">(新消息)</span></span>
-			<img src="iconc06.png" alt="" class="imgAgent03 fr">
-	</div>
-	</a>
+    <a id="message_link" href="message.html">
+        <div class="centerBill" style="border-bottom:1px solid #f7f7f7; margin-bottom:0">
+            <img src="iconc04.png" alt="" class="imgAgent02">
+            <span class="fl color01">系统消息<span id="new_message" style="color:red; display:none">(新消息)</span></span>
+            <img src="iconc06.png" alt="" class="imgAgent03 fr">
+        </div>
+    </a>
 
-	<a href="about.html">
-	<div class="centerBill" style="margin-top:0">
-			<img src="iconc05.png" alt="" class="imgAgent02">
-			<span class="fl color01">关于我们</span>
-			<img src="iconc06.png" alt="" class="imgAgent03 fr">
-	</div>
-	</a>
+    <a href="about.html">
+        <div class="centerBill" style="margin-top:0">
+            <img src="iconc05.png" alt="" class="imgAgent02">
+            <span class="fl color01">关于我们</span>
+            <img src="iconc06.png" alt="" class="imgAgent03 fr">
+        </div>
+    </a>
 
-	<a id="logout_link" style="display: none" onClick='LanJsBridge.logout();window.location.reload();'>
-	<div class="centerBill">
-			<span class="fl color01">退出账户</span>
-	</div>
-	</a>
+    <a id="logout_link" style="display: none"
+       onClick='LanJsBridge.logout();window.location.reload();'>
+        <div class="centerBill">
+            <span class="fl color01">退出账户</span>
+        </div>
+    </a>
 
-	<!-- 底部通栏
+    <!-- 底部通栏
     <footer class="nav-bottom">
             <a class="navList">
                 <img src="images/index-a.png" alt="">
@@ -154,6 +161,9 @@ function updateDisplay(userId, password, para3){
 	    document.getElementById('logout_link').style.display = 'none';
 	}
 }
+
+
+
 </script>
 </body>
 </html>

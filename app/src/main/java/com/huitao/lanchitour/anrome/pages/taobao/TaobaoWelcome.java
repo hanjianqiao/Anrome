@@ -18,13 +18,14 @@ import com.huitao.lanchitour.anrome.pages.supports.jsbridge.LanWebAppInterface;
 
 public class TaobaoWelcome extends Fragment {
     public WebView mainView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = (View)inflater.inflate(R.layout.taobao_layout_welcome, container, false);
+        View v = inflater.inflate(R.layout.taobao_layout_welcome, container, false);
 
-        mainView = (WebView)v.findViewById(R.id.webview_taobao_welcome);
+        mainView = (WebView) v.findViewById(R.id.webview_taobao_welcome);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);

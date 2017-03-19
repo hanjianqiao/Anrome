@@ -33,13 +33,14 @@ public class PostGetJson {
         };
         return hostnameVerifier;
     }
+
     public static JSONObject httpsPostGet(String address, String jsonString) {
 
         try {
             URL url = new URL(address);
             //HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 
-            HttpsURLConnection conn =(HttpsURLConnection) url.openConnection();
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
             conn.setHostnameVerifier(getHostnameVerifier());
 
@@ -86,11 +87,12 @@ public class PostGetJson {
         }
         return null;
     }
+
     public static JSONObject httpPostGet(String address, String jsonString) {
 
         try {
             URL url = new URL(address);
-            HttpURLConnection conn =(HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");

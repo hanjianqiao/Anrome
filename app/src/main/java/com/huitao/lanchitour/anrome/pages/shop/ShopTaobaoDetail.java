@@ -21,12 +21,13 @@ public class ShopTaobaoDetail extends Fragment {
     public static final String ARG_URL = "item";
     private WebView mainView;
     private String target = "";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         target = getArguments().getString(ARG_URL);
-        View v = (View) inflater.inflate(R.layout.general_taobao_detail_layout, container, false);
+        View v = inflater.inflate(R.layout.general_taobao_detail_layout, container, false);
         Button bt_back = (Button) v.findViewById(R.id.general_taobao_detail_bt_back);
 
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +54,7 @@ public class ShopTaobaoDetail extends Fragment {
         mainView.setScaleX(1.0f);
 
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
-        mainView.setWebViewClient(new ShopTaobaoWebViewClient((MainActivity)getActivity()));
+        mainView.setWebViewClient(new ShopTaobaoWebViewClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
         mainView.loadUrl(target);
 

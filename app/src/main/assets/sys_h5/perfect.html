@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>小牛快淘</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta content="telephone=no, address=no" name="format-detection">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<!-- rem设置 -->
-	<script type="text/javascript">
+    <title>小牛快淘</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- rem设置 -->
+    <script type="text/javascript">
 		var scale = 1 / devicePixelRatio;
 		document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
 		document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
-	</script>
-	<style>
+
+
+
+    </script>
+    <style>
 		html {height: 100%;	-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%}
 		body {
 			font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
@@ -68,35 +71,39 @@
 		.btn03 {width: 80%;	background: #fe9901;border: 0;	height: .8rem;line-height: .8rem;	margin: 0.45rem auto .2rem;	border-radius: 5px;	color: #fff;font-size: .36rem}
 		.font30 {font-size: .32rem}
 		.checkBox{width: 80%; margin:0 auto; overflow: hidden;}
-	</style>
+
+
+
+    </style>
 </head>
 
 <body>
-	<!-- 布局 -->
-	<section>
-		<div class="con">
-			<div class="border">
-					<input id="code" type="number" placeholder="请输入您的邀请码">
-					<div class="name01"></div>
-			</div>
-			<div class="border">
-					<input id="qq" type="number" placeholder="您的QQ号">
-					<div class="name01" id="name02"></div>
-			</div>
-			<div class="border">
-					<input id="wechat" type="text" placeholder="您的微信号">
-					<div  class="name01"  id="name03"></div>
-			</div>
-			<button id="registerbtn" class="btn03"  onclick="">完成注册</button>
-			<br>
-			<div class="checkBox">
-				<label>
-					<input  type="checkbox" onchange="toggleCheckbox(this)"  style="width: 0.39rem; height: 0.35rem;padding:0; position:relative; color:green; background:#fff; vertical-align:bottom;">
-				</label>
-				<a onClick='LanJsBridge.showAgreement();'>同意用户协议</a>
-			</div>
-		</div>
-	</section>
+<!-- 布局 -->
+<section>
+    <div class="con">
+        <div class="border">
+            <input id="code" type="number" placeholder="请输入您的邀请码">
+            <div class="name01"></div>
+        </div>
+        <div class="border">
+            <input id="qq" type="number" placeholder="您的QQ号">
+            <div class="name01" id="name02"></div>
+        </div>
+        <div class="border">
+            <input id="wechat" type="text" placeholder="您的微信号">
+            <div class="name01" id="name03"></div>
+        </div>
+        <button id="registerbtn" class="btn03" onclick="">完成注册</button>
+        <br>
+        <div class="checkBox">
+            <label>
+                <input type="checkbox" onchange="toggleCheckbox(this)"
+                       style="width: 0.39rem; height: 0.35rem;padding:0; position:relative; color:green; background:#fff; vertical-align:bottom;">
+            </label>
+            <a onClick='LanJsBridge.showAgreement();'>同意用户协议</a>
+        </div>
+    </div>
+</section>
 </body>
 <script>
 	function updateDisplay(para1, para2, para3){
@@ -124,5 +131,8 @@
 			LanJsBridge.showAlert('注册失败', ret);
 		}
 	}
+
+
+
 </script>
 </html>

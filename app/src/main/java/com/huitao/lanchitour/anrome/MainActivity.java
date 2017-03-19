@@ -40,24 +40,21 @@ import com.huitao.lanchitour.anrome.pages.taobao.TaobaoWelcome;
 import com.huitao.lanchitour.anrome.pages.user.UserCenter;
 import com.jetradar.multibackstack.BackStackActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.UUID;
 
 public class MainActivity extends BackStackActivity implements BottomNavigationBar.OnTabSelectedListener {
     private static final String STATE_CURRENT_TAB_ID = "current_tab_id";
     private static final int MAIN_TAB_ID = 3;
-
+    // An object that manages Messages in a Thread
+    public Handler mHandler;
+    boolean doubleBackToExitPressedOnce = false;
     private Menu menu;
     private BottomNavigationBar bottomNavBar;
     private Fragment curFragment;
@@ -66,26 +63,26 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     private Deque<Fragment> stack1 = new ArrayDeque<Fragment>();
     private Deque<Fragment> stack2 = new ArrayDeque<Fragment>();
     private Deque<Fragment> stack3 = new ArrayDeque<Fragment>();
-    // An object that manages Messages in a Thread
-    public Handler mHandler;
-    public void doRefresh(){
-        if(Global.isLoggedIn && curTabId == 3){
-            WebView mainView = (WebView)findViewById(R.id.webview_user);
-            if(mainView.getUrl().toString().endsWith("my.html")){
+
+    public void doRefresh() {
+        if (Global.isLoggedIn && curTabId == 3) {
+            WebView mainView = (WebView) findViewById(R.id.webview_user);
+            if (mainView.getUrl().toString().endsWith("my.html")) {
                 Log.d("Static refresh", "Hello");
                 mainView.reload();
             }
         }
     }
+
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
         //setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
-        mHandler = new Handler(Looper.getMainLooper()){
+        mHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message inputMessage) {
                 Log.d("WebView", "Main handler: " + inputMessage.what);
-                switch(inputMessage.what){
+                switch (inputMessage.what) {
                     case 0:
                         doRefresh();
                         break;
@@ -135,9 +132,9 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     conn.disconnect();
                     JSONObject json = new JSONObject(stringToParse);
 
-                    Log.d("WebView", "New version is "+json.getString("message"));
+                    Log.d("WebView", "New version is " + json.getString("message"));
 
-                    if(Global.version < Integer.valueOf(json.getString("message"))){
+                    if (Global.version < Integer.valueOf(json.getString("message"))) {
                         Message message = Global.m.mHandler.obtainMessage(1);
                         message.sendToTarget();
                     }
@@ -198,26 +195,25 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
         super.onSaveInstanceState(outState);
     }
 
-    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
         //Pair<Integer, Fragment> pair = popFragmentFromBackStack();
         Fragment f = null;
-        switch(curTabId){
+        switch (curTabId) {
             case 0:
-                if(!stack0.isEmpty())
-                f = stack0.pop();
+                if (!stack0.isEmpty())
+                    f = stack0.pop();
                 break;
             case 1:
-                if(!stack1.isEmpty())
-                f = stack1.pop();
+                if (!stack1.isEmpty())
+                    f = stack1.pop();
                 break;
             case 2:
-                if(!stack2.isEmpty())
-                f = stack2.pop();
+                if (!stack2.isEmpty())
+                    f = stack2.pop();
                 break;
             case 3:
-                if(!stack3.isEmpty())
+                if (!stack3.isEmpty())
                     f = stack3.pop();
                 break;
         }
@@ -239,7 +235,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
 
                 @Override
                 public void run() {
-                    doubleBackToExitPressedOnce=false;
+                    doubleBackToExitPressedOnce = false;
                 }
             }, 1000);
         }
@@ -247,12 +243,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
 
     @Override
     public void onTabSelected(int position) {
-        Log.d("TabF", "Tab Selected:"+position+" Cur:"+curTabId);
-        if(Global.isLoggedIn == false){
+        Log.d("TabF", "Tab Selected:" + position + " Cur:" + curTabId);
+        if (Global.isLoggedIn == false) {
             bottomNavBar.selectTab(3, false);
-            if(curTabId != 3){
+            if (curTabId != 3) {
                 if (curFragment != null) {
-                    switch(curTabId){
+                    switch (curTabId) {
                         case 0:
                             stack0.push(curFragment);
                             break;
@@ -266,31 +262,31 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                             stack3.push(curFragment);
                             break;
                     }
-                    Log.d("TabF", "Tab cur is none:"+position);
+                    Log.d("TabF", "Tab cur is none:" + position);
                 }
                 curTabId = 3;
                 Fragment f = null;
-                switch(curTabId){
+                switch (curTabId) {
                     case 0:
-                        if(!stack0.isEmpty())
+                        if (!stack0.isEmpty())
                             f = stack0.pop();
                         break;
                     case 1:
-                        if(!stack1.isEmpty())
+                        if (!stack1.isEmpty())
                             f = stack1.pop();
                         break;
                     case 2:
-                        if(!stack2.isEmpty())
+                        if (!stack2.isEmpty())
                             f = stack2.pop();
                         break;
                     case 3:
-                        if(!stack3.isEmpty())
+                        if (!stack3.isEmpty())
                             f = stack3.pop();
                         break;
                 }
                 if (f == null) {
                     f = rootTabFragment(curTabId);
-                    Log.d("TabF", "Tab frag is none:"+position);
+                    Log.d("TabF", "Tab frag is none:" + position);
                 }
                 replaceFragment(f);
             }
@@ -307,7 +303,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
             return;
         }
         if (curFragment != null) {
-            switch(curTabId){
+            switch (curTabId) {
                 case 0:
                     stack0.push(curFragment);
                     break;
@@ -321,49 +317,49 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     stack3.push(curFragment);
                     break;
             }
-            Log.d("TabF", "Tab cur is none:"+position);
+            Log.d("TabF", "Tab cur is none:" + position);
         }
         curTabId = position;
         Fragment f = null;
-        switch(curTabId){
+        switch (curTabId) {
             case 0:
-                if(!stack0.isEmpty())
+                if (!stack0.isEmpty())
                     f = stack0.pop();
                 break;
             case 1:
-                if(!stack1.isEmpty())
-                f = stack1.pop();
+                if (!stack1.isEmpty())
+                    f = stack1.pop();
                 break;
             case 2:
-                if(!stack2.isEmpty())
-                f = stack2.pop();
+                if (!stack2.isEmpty())
+                    f = stack2.pop();
                 break;
             case 3:
-                if(!stack3.isEmpty())
-                f = stack3.pop();
+                if (!stack3.isEmpty())
+                    f = stack3.pop();
                 break;
         }
         if (f == null) {
             f = rootTabFragment(curTabId);
-            Log.d("TabF", "Tab frag is none:"+position);
+            Log.d("TabF", "Tab frag is none:" + position);
         }
         replaceFragment(f);
     }
 
     @Override
     public void onTabReselected(int position) {
-        Log.d("TabF", "Tab Reselected:"+position);
-        if(position == 0){
+        Log.d("TabF", "Tab Reselected:" + position);
+        if (position == 0) {
             WebView wv = (WebView) findViewById(R.id.webview_taobao_welcome);
             wv.loadUrl("file:///android_asset/sys_h5/index.html");
             Fragment f = null;
-            if(stack0.isEmpty()){
+            if (stack0.isEmpty()) {
                 return;
             }
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction tr = fm.beginTransaction();
             f = curFragment;
-            while(!stack0.isEmpty()){
+            while (!stack0.isEmpty()) {
                 tr.remove(f);
                 f = stack0.pop();
             }
@@ -373,7 +369,8 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     }
 
     @Override
-    public void onTabUnselected(int position) {}
+    public void onTabUnselected(int position) {
+    }
 
     public void showFragment(@NonNull Fragment fragment) {
         showFragment(fragment, true);
@@ -382,7 +379,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     public void showFragment(@NonNull Fragment fragment, boolean addToBackStack) {
         Log.d("Debugs:", "6");
         if (curFragment != null && addToBackStack) {
-            switch(curTabId){
+            switch (curTabId) {
                 case 0:
                     stack0.push(curFragment);
                     break;
@@ -401,7 +398,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     }
 
     private void backTo(@NonNull Fragment fragment) {
-        Log.d("Debugs:", "5"+fragment.isAdded());
+        Log.d("Debugs:", "5" + fragment.isAdded());
         replaceFragment(fragment);
         getSupportFragmentManager().executePendingTransactions();
     }
@@ -410,13 +407,13 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     private void replaceFragment(@NonNull Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction tr = fm.beginTransaction();
-        if(curFragment != null && fragment.isAdded()){
+        if (curFragment != null && fragment.isAdded()) {
             Log.d("Debugs:", "1");
             tr.hide(curFragment).show(fragment);
-        }else if(curFragment != null){
-            Log.d("Debugs:", "2"+fragment);
-            tr.hide(curFragment).add(R.id.content,fragment, "");
-        }else{
+        } else if (curFragment != null) {
+            Log.d("Debugs:", "2" + fragment);
+            tr.hide(curFragment).add(R.id.content, fragment, "");
+        } else {
             Log.d("Debugs:", "9");
             tr.add(R.id.content, fragment);
         }
@@ -424,10 +421,11 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
         curFragment = fragment;
         tr.commit();
         fm.executePendingTransactions();
-        Log.d("Debugs:", "4"+fragment.isAdded());
+        Log.d("Debugs:", "4" + fragment.isAdded());
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         Global.stop();
         super.onDestroy();
     }

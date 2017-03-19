@@ -18,12 +18,13 @@ import com.huitao.lanchitour.anrome.pages.supports.jsbridge.LanWebAppInterface;
 
 public class Self extends Fragment {
     public WebView mainView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = (View)inflater.inflate(R.layout.self_layout_main, container, false);
-        mainView = (WebView)v.findViewById(R.id.webview_self);
+        View v = inflater.inflate(R.layout.self_layout_main, container, false);
+        mainView = (WebView) v.findViewById(R.id.webview_self);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);
