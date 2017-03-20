@@ -59,15 +59,15 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     private BottomNavigationBar bottomNavBar;
     private Fragment curFragment;
     private int curTabId;
-    private Deque<Fragment> stack0 = new ArrayDeque<Fragment>();
-    private Deque<Fragment> stack1 = new ArrayDeque<Fragment>();
-    private Deque<Fragment> stack2 = new ArrayDeque<Fragment>();
-    private Deque<Fragment> stack3 = new ArrayDeque<Fragment>();
+    private Deque<Fragment> stack0 = new ArrayDeque<>();
+    private Deque<Fragment> stack1 = new ArrayDeque<>();
+    private Deque<Fragment> stack2 = new ArrayDeque<>();
+    private Deque<Fragment> stack3 = new ArrayDeque<>();
 
     public void doRefresh() {
         if (Global.isLoggedIn && curTabId == 3) {
             WebView mainView = (WebView) findViewById(R.id.webview_user);
-            if (mainView.getUrl().toString().endsWith("my.html")) {
+            if (mainView.getUrl().endsWith("my.html")) {
                 Log.d("Static refresh", "Hello");
                 mainView.reload();
             }
@@ -115,7 +115,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
         final Runnable beeper = new Runnable() {
             public void run() {
                 try {
-                    URL url = new URL("http://user.hanjianqiao.cn:13420/check");
+                    URL url = new URL("http://version.vsusvip.com:13420/android");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                         throw new RuntimeException("Failed : HTTP error code : "
@@ -244,7 +244,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     @Override
     public void onTabSelected(int position) {
         Log.d("TabF", "Tab Selected:" + position + " Cur:" + curTabId);
-        if (Global.isLoggedIn == false) {
+        if (!Global.isLoggedIn) {
             bottomNavBar.selectTab(3, false);
             if (curTabId != 3) {
                 if (curFragment != null) {
@@ -258,32 +258,15 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                         case 2:
                             stack2.push(curFragment);
                             break;
-                        case 3:
-                            stack3.push(curFragment);
-                            break;
                     }
                     Log.d("TabF", "Tab cur is none:" + position);
                 }
                 curTabId = 3;
                 Fragment f = null;
-                switch (curTabId) {
-                    case 0:
-                        if (!stack0.isEmpty())
-                            f = stack0.pop();
-                        break;
-                    case 1:
-                        if (!stack1.isEmpty())
-                            f = stack1.pop();
-                        break;
-                    case 2:
-                        if (!stack2.isEmpty())
-                            f = stack2.pop();
-                        break;
-                    case 3:
-                        if (!stack3.isEmpty())
-                            f = stack3.pop();
-                        break;
+                if (!stack3.isEmpty()) {
+                    f = stack3.pop();
                 }
+
                 if (f == null) {
                     f = rootTabFragment(curTabId);
                     Log.d("TabF", "Tab frag is none:" + position);
@@ -352,7 +335,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
         if (position == 0) {
             WebView wv = (WebView) findViewById(R.id.webview_taobao_welcome);
             wv.loadUrl("file:///android_asset/sys_h5/index.html");
-            Fragment f = null;
+            Fragment f;
             if (stack0.isEmpty()) {
                 return;
             }

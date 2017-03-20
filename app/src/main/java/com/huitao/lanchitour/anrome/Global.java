@@ -23,7 +23,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Global {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    public static int version = 4;
+    public static int version = 6;
     public static MainActivity m;
     public static String username = "";
     public static String password = "";
@@ -47,12 +47,13 @@ public class Global {
 
     public static boolean isVip() {
         Calendar calendar = Calendar.getInstance();
-        boolean Y = (endYear > calendar.get(Calendar.YEAR));
-        boolean YE = (endYear == calendar.get(Calendar.YEAR));
-        boolean M = (endMonth > calendar.get(Calendar.MONTH));
-        boolean ME = (endMonth == calendar.get(Calendar.MONTH));
-        boolean D = (endDay > calendar.get(Calendar.DAY_OF_MONTH));
-        return Y || (YE && M) || (YE && ME && D);
+        boolean Y = (endYear < calendar.get(Calendar.YEAR));
+        boolean YE = (endYear == (calendar.get(Calendar.YEAR)));
+        boolean M = (endMonth < calendar.get(Calendar.MONTH));
+        boolean ME = (endMonth == (calendar.get(Calendar.MONTH)));
+        boolean D = (endDay < calendar.get(Calendar.DAY_OF_MONTH));
+        Log.d("WebView", "" + Y + YE + M + ME + D);
+        return !(Y || (YE && M) || (YE && ME && D));
     }
 
     public static void start(final MainActivity m) {
@@ -70,9 +71,9 @@ public class Global {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                JSONObject jo = PostGetJson.httpPostGet("http://user.hanjianqiao.cn:30000/check", jsonData.toString());
+                JSONObject jo = PostGetJson.httpPostGet("http://user.vsusvip.com:30000/check", jsonData.toString());
                 try {
-                    if (jo.getString("status").equals("ok"))
+                    if (jo != null && jo.getString("status").equals("ok"))
                         if (jo.getString("message").equals("yes")) {
                             Global.newMessage = 1;
                             Message message = m.mHandler.obtainMessage(0);

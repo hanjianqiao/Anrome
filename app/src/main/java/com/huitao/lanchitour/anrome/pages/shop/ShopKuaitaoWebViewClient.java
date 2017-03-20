@@ -5,6 +5,7 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.huitao.lanchitour.anrome.Global;
 import com.huitao.lanchitour.anrome.MainActivity;
 import com.huitao.lanchitour.anrome.pages.supports.file.LanJSReader;
 
@@ -36,7 +37,7 @@ public class ShopKuaitaoWebViewClient extends WebViewClient {
             view.loadUrl(newUrl);
             return true;
         } else if (url.startsWith("ios:")) {
-            String newUrl = "";
+            String newUrl;
             if (url.startsWith("ios:http://")) {
                 newUrl = url.substring(4);
             } else if (url.startsWith("ios:https://")) {
@@ -62,7 +63,7 @@ public class ShopKuaitaoWebViewClient extends WebViewClient {
         tV.post(new Runnable() {
             @Override
             public void run() {
-                tV.loadUrl("javascript:doWork('" + target + "','true')");
+                tV.loadUrl("javascript:doWork('" + target + "','" + Global.isVip() + "')");
             }
         });
         //c.tv_url.setText(url, TextView.BufferType.NORMAL);

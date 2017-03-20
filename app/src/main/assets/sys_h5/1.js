@@ -20,6 +20,6 @@ function callBack(html, url){
 	}
 }
 function updateDisplay(userId, password, messageId){
-	htmlText = LanJsBridge.getDataFromUrl("http://user.hanjianqiao.cn:30000/list?userid="+userId+"&password="+password, "callBack");
+	htmlText = LanJsBridge.getDataFromUrl("http://user.vsusvip.com:30000/list?userid="+userId+"&password="+password, "callBack");
 	callBack(htmlText, '');
 }

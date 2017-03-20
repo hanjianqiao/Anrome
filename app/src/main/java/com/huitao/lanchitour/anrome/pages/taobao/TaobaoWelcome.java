@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageButton;
 
 import com.huitao.lanchitour.anrome.MainActivity;
 import com.huitao.lanchitour.anrome.R;
@@ -25,6 +26,14 @@ public class TaobaoWelcome extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.taobao_layout_welcome, container, false);
 
+        ImageButton bt_home = (ImageButton) v.findViewById(R.id.taobao_welcom_bt_ali);
+
+        bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainView.loadUrl("http://www.alimama.com");
+            }
+        });
         mainView = (WebView) v.findViewById(R.id.webview_taobao_welcome);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。

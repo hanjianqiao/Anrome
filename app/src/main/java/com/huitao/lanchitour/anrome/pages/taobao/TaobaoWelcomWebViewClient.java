@@ -25,7 +25,8 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
         Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
         url = URLDecoder.decode(url);
         if (url.startsWith("http")) {
-            //view.loadUrl(url);
+            view.loadUrl(url);
+            return false;
         } else if (url.startsWith("intent")) {
             String newUrl = url.substring(url.indexOf("http"), url.indexOf(";end"));
             view.loadUrl(newUrl);
@@ -35,8 +36,9 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
             view.loadUrl(newUrl);
             return false;
         } else if (url.startsWith("ios:?q=")) {
+            view.stopLoading();
             Log.d("WebView", url);
-            String newUrl = "";
+            String newUrl;
             if (url.startsWith("ios:?q=http://")) {
                 newUrl = url.substring(7);
             } else if (url.startsWith("ios:?q=https://")) {
@@ -57,9 +59,6 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
 
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        if (!url.endsWith("index.html")) {
-            view.stopLoading();
-        }
         Log.d("WebView", "onPageStarted:" + url);
     }
 

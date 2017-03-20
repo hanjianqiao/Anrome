@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,34 +12,34 @@
         android:background="@drawable/customborder0"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/user_toolbar_back"
-            style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/taobao_welcom_bt_ali"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textAllCaps="true" />
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/alimama"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            app:srcCompat="@drawable/taobao_home" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="小牛快淘"
+            android:text="@string/xiaoniukuaitao"
             android:textAlignment="center"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:text="@string/blank"
+            android:visibility="invisible" />
+
     </LinearLayout>
 
     <WebView

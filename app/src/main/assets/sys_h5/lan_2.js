@@ -50,6 +50,6 @@ function callBack(html, url){
 function doWork(q){
     searchKey = q;
 	target = document.getElementsByClassName('product-list')[0];
-	htmlText = LanJsBridge.getDataFromUrl("http://user.hanjianqiao.cn:7008/search"+q, "callBack");
+	htmlText = LanJsBridge.getDataFromUrl("http://self.vsusvip.com:7008/search"+q, "callBack");
 	callBack(htmlText, "");
 }

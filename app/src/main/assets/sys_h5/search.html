@@ -69,7 +69,7 @@
         function loadMore(){
             var limit = 20;
             nowLoad = nowLoad+limit;
-            htmlText = LanJsBridge.getDataFromUrl("http://user.hanjianqiao.cn:7008/search"+searchKey+"&offset="+nowLoad+"&limit="+limit, "callBack")
+            htmlText = LanJsBridge.getDataFromUrl("http://self.vsusvip.com:7008/search"+searchKey+"&offset="+nowLoad+"&limit="+limit, "callBack")
             callBack(htmlText, "");
         }
 

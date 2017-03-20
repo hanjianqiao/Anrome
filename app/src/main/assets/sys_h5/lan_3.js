@@ -16,13 +16,13 @@ function callBack(html, url){
     if(showIt){
         document.getElementById("selllink").href = "huitao:http://pub.alimama.com/promo/item/channel/index.htm?q="+encodeURIComponent(jo.url)+"&channel=qqhd";
     }else{
-        document.getElementById("selllink").href = notVip;
+        document.getElementById("selllink").onclick = notVip;
     }
 	document.getElementById("taodetail").href = "ios:showTaobaoDetail:"+jo.url;
 }
 function doWork(q, isVip){
-    showIt = LanJsBridge.isVip();
-	//LanJsBridge.getDataFromUrl("https://shop.hanjianqiao.cn:30002/query?id="+get('id'), "callBack")
-	htmlText = LanJsBridge.getDataFromUrl("http://user.hanjianqiao.cn:7010/query?id="+q, "callBack")
+    showIt = isVip;
+	//LanJsBridge.getDataFromUrl("https://shop.vsusvip.com:30002/query?id="+get('id'), "callBack")
+	htmlText = LanJsBridge.getDataFromUrl("http://shop.vsusvip.com:7010/query?id="+q, "callBack")
 	callBack(htmlText, "");
 }

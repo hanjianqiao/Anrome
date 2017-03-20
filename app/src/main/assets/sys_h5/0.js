@@ -6,6 +6,6 @@ function callBack(html, url){
     document.getElementById("body").innerHTML=ja.body;
 }
 function updateDisplay(userId, password, messageId){
-	htmlText = LanJsBridge.getDataFromUrl("http://user.hanjianqiao.cn:30000/detail?id="+messageId+"&userid="+userId+"&password="+password, "callBack");
+	htmlText = LanJsBridge.getDataFromUrl("http://user.vsusvip.com:30000/detail?id="+messageId+"&userid="+userId+"&password="+password, "callBack");
 	callBack(htmlText, "");
 }

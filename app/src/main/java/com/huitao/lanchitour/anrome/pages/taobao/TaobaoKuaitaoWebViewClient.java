@@ -39,7 +39,7 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
             view.loadUrl(newUrl);
             return true;
         } else if (url.startsWith("ios:")) {
-            String newUrl = "";
+            String newUrl;
             if (url.startsWith("ios:http://")) {
                 newUrl = url.substring(4);
             } else if (url.startsWith("ios:https://")) {
@@ -63,21 +63,21 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
         TextView title = (TextView) m.findViewById(R.id.taobao_kuaitao_title);
         if (url.endsWith("kuaitao.html")) {
             if ((target.indexOf("h5.m.taobao.com/awp/core/detail.htm") > 0) || (target.indexOf("detail.m.tmall.com/item.htm") > 0) || (target.indexOf("detail.m.liangxinyao.com/item.htm") > 0)) {
-                if (Global.level == "user") {
-                    title.setText("开通VIP可查看");
+                if (Global.isVip()) {
+                    title.setText(R.string.kuaitaoyixia);
                 } else {
-                    title.setText("快淘一下");
+                    title.setText(R.string.buy_vip_to_check);
                 }
                 final WebView tV = view;
                 view.loadUrl("javascript:" + LanJSReader.getFromAssets(m));
                 tV.post(new Runnable() {
                     @Override
                     public void run() {
-                        tV.loadUrl("javascript:doWork('" + target + "','true')");
+                        tV.loadUrl("javascript:doWork('" + target + "'," + Global.isVip() + ")");
                     }
                 });
             } else {
-                title.setText("请在商品详情页使用");
+                title.setText(R.string.use_in_detail_page);
             }
         } else if (url.indexOf("alimama.com") > 0) {
             final WebView tV = view;

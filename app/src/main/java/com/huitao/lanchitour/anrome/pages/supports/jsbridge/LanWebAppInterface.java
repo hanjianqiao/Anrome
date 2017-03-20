@@ -1,5 +1,6 @@
 package com.huitao.lanchitour.anrome.pages.supports.jsbridge;
 
+import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,8 +31,8 @@ import javax.net.ssl.SSLSession;
  */
 
 public class LanWebAppInterface {
-    public static final String PREFS_NAME = "MyPrefsFile";
-    Context mContext;
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private Context mContext;
 
     /**
      * Instantiate the interface and set the context
@@ -41,15 +42,12 @@ public class LanWebAppInterface {
     }
 
     private static HostnameVerifier getHostnameVerifier() {
-        HostnameVerifier hostnameVerifier = new HostnameVerifier() {
+        return new HostnameVerifier() {
             @Override
             public boolean verify(String hostname, SSLSession session) {
-                HostnameVerifier hv =
-                        HttpsURLConnection.getDefaultHostnameVerifier();
                 return true;
             }
         };
-        return hostnameVerifier;
     }
 
     @JavascriptInterface
@@ -65,15 +63,13 @@ public class LanWebAppInterface {
     @JavascriptInterface
     public String susername() {
         SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME, 0);
-        String ret = settings.getString("username", "");
-        return ret;
+        return settings.getString("username", "");
     }
 
     @JavascriptInterface
     public String spassword() {
         SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME, 0);
-        String ret = settings.getString("password", "");
-        return ret;
+        return settings.getString("password", "");
     }
 
     @JavascriptInterface
@@ -139,7 +135,7 @@ public class LanWebAppInterface {
     public String getDataFromUrl(String address, String callback) throws Exception {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
-        int len = 0;
+        int len;
         URL url = new URL(address);
         CookieManager cookieManager = CookieManager.getInstance();
         String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
@@ -155,11 +151,12 @@ public class LanWebAppInterface {
         return str;
     }
 
+    @SuppressLint("SSLCertificateSocketFactoryGetInsecure")
     @JavascriptInterface
     public String getDataFromUrls(String address, String callback) throws Exception {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
-        int len = 0;
+        int len;
         URL url = new URL(address);
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
@@ -200,8 +197,11 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在注册...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.hanjianqiao.cn:10000/register", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/register", jsonData.toString());
         alertDialog.dismiss();
+        if (jo == null) {
+            return "网络异常";
+        }
         if (jo.getString("status").equals("ok")) {
             return "ok";
         }
@@ -216,7 +216,7 @@ public class LanWebAppInterface {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("username", username);
         editor.putString("password", password);
-        editor.commit();
+        editor.apply();
     }
 
     @JavascriptInterface
@@ -229,8 +229,11 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在登录...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.hanjianqiao.cn:10000/login", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/login", jsonData.toString());
         alertDialog.dismiss();
+        if (jo == null) {
+            return "网络异常";
+        }
         if (jo.getString("status").equals("ok")) {
             JSONObject userInfo = new JSONObject(jo.getString("data"));
             Global.username = userInfo.getString("user_id");
@@ -257,8 +260,11 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在购买VIP...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.hanjianqiao.cn:10000/up2vip", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/up2vip", jsonData.toString());
         alertDialog.dismiss();
+        if (jo == null) {
+            return "网络异常";
+        }
         if (jo.getString("status").equals("ok")) {
             login(Global.username, Global.password);
             return "ok";
@@ -279,8 +285,11 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在续费VIP...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.hanjianqiao.cn:10000/extendvip", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/extendvip", jsonData.toString());
         alertDialog.dismiss();
+        if (jo == null) {
+            return "网络异常";
+        }
         if (jo.getString("status").equals("ok")) {
             login(Global.username, Global.password);
             return "ok";
@@ -301,8 +310,11 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在购买套餐...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.hanjianqiao.cn:10000/extendagent", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/extendagent", jsonData.toString());
         alertDialog.dismiss();
+        if (jo == null) {
+            return "网络异常";
+        }
         if (jo.getString("status").equals("ok")) {
             return "ok";
         }

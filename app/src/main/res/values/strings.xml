@@ -2,7 +2,13 @@
     <string name="app_name">小牛快淘</string>
 
     <string name="taobao">查</string>
-    <string name="shop">高拥</string>
+    <string name="shop">高佣</string>
     <string name="self">自选</string>
     <string name="user">我的</string>
+    <string name="buy_vip_to_check">开通VIP可查看</string>
+    <string name="kuaitaoyixia">快淘一下</string>
+    <string name="use_in_detail_page">请在商品详情页使用</string>
+    <string name="alimama">阿里妈妈</string>
+    <string name="xiaoniukuaitao">小牛快淘</string>
+    <string name="blank">foo</string>
 </resources>

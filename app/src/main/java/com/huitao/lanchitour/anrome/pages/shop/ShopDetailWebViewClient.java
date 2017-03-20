@@ -6,6 +6,7 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.huitao.lanchitour.anrome.Global;
 import com.huitao.lanchitour.anrome.MainActivity;
 
 import java.net.URLDecoder;
@@ -67,7 +68,7 @@ public class ShopDetailWebViewClient extends WebViewClient {
         tV.post(new Runnable() {
             @Override
             public void run() {
-                tV.loadUrl("javascript:doWork('" + goodId + "',false)");
+                tV.loadUrl("javascript:doWork('" + goodId + "'," + Global.isVip() + ")");
             }
         });
         //c.tv_url.setText(url, TextView.BufferType.NORMAL);
