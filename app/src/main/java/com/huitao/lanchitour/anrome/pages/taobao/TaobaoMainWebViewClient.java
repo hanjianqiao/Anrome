@@ -8,7 +8,7 @@ import android.webkit.WebViewClient;
 import java.net.URLDecoder;
 
 /**
- * Created by hanji on 2016/11/6.
+ * Created by Lanchitour on 20170/1/01 modifu at 2016/11/6 15:35
  */
 
 public class TaobaoMainWebViewClient extends WebViewClient {
@@ -23,6 +23,10 @@ public class TaobaoMainWebViewClient extends WebViewClient {
             view.loadUrl(newUrl);
             return false;
         } else if (view.getUrl().startsWith("http://e22a.com/")) {
+            String newUrl = "http" + url.substring(6, url.length());
+            view.loadUrl(newUrl);
+            return false;
+        } else if (url.startsWith("taobao://")) {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
             return false;
