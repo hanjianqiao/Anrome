@@ -49,12 +49,11 @@ function callBack(html, url){
     }else{
         //LanJsBridge.callInMain("lastStage1", "");
         lastStage1('');
-
     }
 }
 
 function doWork(isVip){
-    showIt = LanJsBridge.isVip();
+    showIt = isVip;
 	//LanJsBridge.getDataFromUrl("https://shop.vsusvip.com:30002/search?key="+get('catalog'), "callBack")
     var catalog = get('catalog');
     if(catalog == null) catalog = '0';
