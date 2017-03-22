@@ -266,7 +266,10 @@ function callBackShowAlert(htmlString, url){
 function doWork(srcUrl, showit){
     showIt = showit;
     if(!isDetailPage(srcUrl)){
-        window.location.href = 'anrome:notvaliad';
+        document.getElementById("genbrorate").innerHTML="0";
+        document.getElementById("days30sell").innerHTML="0";
+        document.getElementById("givebro").innerHTML = "0";
+        document.getElementById("queqiaorate").innerHTML = "0";
         return;
     }
     goodid = getGoodID(srcUrl);

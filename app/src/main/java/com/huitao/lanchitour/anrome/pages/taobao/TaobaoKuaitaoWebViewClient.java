@@ -69,7 +69,6 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
                     title.setText(R.string.buy_vip_to_check);
                 }
                 final WebView tV = view;
-                view.loadUrl("javascript:" + LanJSReader.getFromAssets(m));
                 tV.post(new Runnable() {
                     @Override
                     public void run() {
@@ -78,6 +77,14 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
                 });
             } else {
                 title.setText(R.string.use_in_detail_page);
+
+                final WebView tV = view;
+                tV.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        tV.loadUrl("javascript:doWork('" + target + "'," + Global.isVip() + ")");
+                    }
+                });
             }
         } else if (url.indexOf("alimama.com") > 0) {
             final WebView tV = view;

@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
@@ -70,6 +71,12 @@ public class LanWebAppInterface {
     public String spassword() {
         SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME, 0);
         return settings.getString("password", "");
+    }
+
+    @JavascriptInterface
+    public String sautologin() {
+        SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME, 0);
+        return settings.getString("autologin", "no");
     }
 
     @JavascriptInterface
@@ -133,10 +140,11 @@ public class LanWebAppInterface {
 
     @JavascriptInterface
     public String getDataFromUrl(String address, String callback) throws Exception {
+        Log.d("WebView", " from " + address);
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
         int len;
-        URL url = new URL(address);
+        URL url = new URL(URLDecoder.decode(address));
         CookieManager cookieManager = CookieManager.getInstance();
         String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -157,7 +165,7 @@ public class LanWebAppInterface {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
         int len;
-        URL url = new URL(address);
+        URL url = new URL(URLDecoder.decode(address));
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
         conn.setHostnameVerifier(getHostnameVerifier());
@@ -211,11 +219,12 @@ public class LanWebAppInterface {
     }
 
     @JavascriptInterface
-    public void save(String username, String password) {
+    public void save(String username, String password, String autologin) {
         SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("username", username);
         editor.putString("password", password);
+        editor.putString("autologin", autologin);
         editor.apply();
     }
 
@@ -328,6 +337,11 @@ public class LanWebAppInterface {
         Global.username = "";
         Global.password = "";
         Global.isLoggedIn = false;
+
+        SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("autologin", "no");
+        editor.apply();
         return "ok";
     }
 

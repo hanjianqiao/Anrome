@@ -86,7 +86,6 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        String version = pInfo.versionName;
         //setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         mHandler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -142,7 +141,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     conn.disconnect();
                     JSONObject json = new JSONObject(stringToParse);
 
-                    Log.d("WebView", "New version is " + json.getString("message"));
+                    Log.d("WebView", "Current version is " + Global.version + " New version is " + json.getString("message"));
 
                     if (Global.version < Integer.valueOf(json.getString("message"))) {
                         Message message = Global.m.mHandler.obtainMessage(1);
