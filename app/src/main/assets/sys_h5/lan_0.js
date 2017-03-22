@@ -2,7 +2,7 @@ var target = document.getElementsByClassName('product-list')[0];
 var shouIt = false;
 
 var str0 = '<a href="ios:showDetail:'
-var str1 = '"><i>领券<br>减'
+var str1 = '"><i>'
 var str2 = '</i><span class="money02">佣金'
 var str3 = '%</span><img src="'
 var str4 = '" alt=""><h4>'
@@ -60,6 +60,7 @@ function doWork(isVip){
     if(catalog == null) catalog = '0';
     var activity = get('activity');
     if(activity == null) activity = '0';
+    if(activity == '0' && catalog == '0') activity = '5';
 	htmlText = LanJsBridge.getDataFromUrl("http://shop.vsusvip.com:7010/search?catalog="+catalog+"&activity="+activity, "callBack")
 	callBack(htmlText, "");
 }

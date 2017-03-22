@@ -23,7 +23,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Global {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    public static int version = 6;
+    public static int version = 7;
     public static MainActivity m;
     public static String username = "";
     public static String password = "";

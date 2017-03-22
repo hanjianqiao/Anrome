@@ -17,6 +17,8 @@
 package com.huitao.lanchitour.anrome;
 
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -77,6 +79,14 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            Global.version = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String version = pInfo.versionName;
         //setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         mHandler = new Handler(Looper.getMainLooper()) {
             @Override
