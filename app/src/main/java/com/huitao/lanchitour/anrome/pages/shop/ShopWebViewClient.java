@@ -40,7 +40,7 @@ public class ShopWebViewClient extends WebViewClient {
         } else if (view.getUrl().startsWith("http://e22a.com/")) {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
-            return true;
+            return false;
         }
         return false;
     }

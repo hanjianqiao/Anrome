@@ -35,7 +35,11 @@ function updateGeneralBrokerageItemCallBack(htmlText, url){
             var innerText = "";
             var jo = ja[i];
             innerText += "<td>" + jo.campaignName + "</td><td>" + (jo.properties == "3" ? "是" : "否");
-            innerText += "</td><td style=\"color:#fe2641\">" + (jo.campaignId == "0" ? tkRate : spTkRates[jo.campaignId]) + "%</td><td>";
+            try{
+                innerText += "</td><td style=\"color:#fe2641\">" + (jo.campaignId == "0" ? tkRate : spTkRates[jo.campaignId]) + "%</td><td>";
+            }catch(e){
+                break;
+            }
             innerText += "<a href=http://pub.alimama.com/myunion.htm?#!/promo/self/campaign?campaignId=";
             innerText += jo.campaignId + "&shopkeeperId=" + jo.shopKeeperId + ">";
             innerText += "<button class=\"btn_02\">申请计划</button></a></td>";
@@ -58,6 +62,7 @@ function updateGeneralBrokerageCallBack(htmlText, url){
     if(obj.data.head.status == "NORESULT"){
         document.getElementById("genbrorate").innerHTML="0%";
         document.getElementById("days30sell").innerHTML="0";
+        document.getElementById("givebro").innerHTML = "0";
         document.getElementById("plantitle").innerHTML="没有计划";
     }else{
         var dataList = obj.data.pageList[0];
@@ -109,10 +114,15 @@ function updateQueqiaoBrokerageCallBack(htmlText, url){
     var obj = eval('('+htmlText+')');
     if(obj.data.head.status == "NORESULT"){
         //document.getElementById("queqiaotitle").innerHTML="没有鹊桥佣金";
+        document.getElementById('queqiaorate').innerHTML = "0%";
         return;
     }
     var jo = obj.data.pageList[0];
-    document.getElementById("queqiaorate").innerHTML = (showIt ? (jo.eventRate ? jo.eventRate : "0") : "??")+"%";
+    try{
+        document.getElementById("queqiaorate").innerHTML = (showIt ? (jo.eventRate ? jo.eventRate : "0") : "??")+"%";
+    }catch(e){
+        document.getElementById("queqiaorate").innerHTML = (showIt ? '0%' : "??%");
+    }
     document.getElementById("genlick").href = (showIt ? ((jo.eventRate || jo.eventRate == '0') ? ("http://pub.alimama.com/promo/item/channel/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&channel=qqhd") : ("http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid)) : "");
     try {
         if(showIt){
