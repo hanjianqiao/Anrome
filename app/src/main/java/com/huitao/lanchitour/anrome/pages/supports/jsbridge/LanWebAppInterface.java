@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -49,6 +50,19 @@ public class LanWebAppInterface {
                 return true;
             }
         };
+    }
+
+    @JavascriptInterface
+    public String decodeURLIfBeginWithPercent(String url) {
+        Log.d("WebView", "I will decode: " + url);
+        try {
+            if (url.startsWith("%")) {
+                return URLDecoder.decode(url, "utf-8");
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return url;
     }
 
     @JavascriptInterface
@@ -144,7 +158,8 @@ public class LanWebAppInterface {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
         int len;
-        URL url = new URL(URLDecoder.decode(address));
+        URL url = new URL(address);
+        Log.d("WebView", "URL address is " + url.toString());
         CookieManager cookieManager = CookieManager.getInstance();
         String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -165,7 +180,7 @@ public class LanWebAppInterface {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
         int len;
-        URL url = new URL(URLDecoder.decode(address));
+        URL url = new URL(address);
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
         conn.setHostnameVerifier(getHostnameVerifier());

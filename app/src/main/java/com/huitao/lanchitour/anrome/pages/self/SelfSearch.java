@@ -3,7 +3,6 @@ package com.huitao.lanchitour.anrome.pages.self;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ public class SelfSearch extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         key = getArguments().getString(ARG_KEY);
-        Log.d("WebView", "SelfSearch load key " + key);
         View v = inflater.inflate(R.layout.self_layout_search, container, false);
         Button bt_back = (Button) v.findViewById(R.id.self_search_bt_back);
 

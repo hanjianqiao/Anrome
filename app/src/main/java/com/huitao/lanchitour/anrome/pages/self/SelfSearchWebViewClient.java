@@ -8,6 +8,7 @@ import android.webkit.WebViewClient;
 
 import com.huitao.lanchitour.anrome.MainActivity;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 /**
@@ -22,10 +23,15 @@ public class SelfSearchWebViewClient extends WebViewClient {
     public SelfSearchWebViewClient(MainActivity m, String s) {
         this.m = m;
         this.key = s;
+        Log.d("WebView", "SelfSearchClient load key " + key);
     }
 
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
+        try {
+            Log.d("WebView", "Redirect to " + URLDecoder.decode(url, "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         if (url.startsWith("http")) {
             //view.loadUrl(url);
         } else if (url.startsWith("ios:showDetail:")) {
@@ -37,13 +43,19 @@ public class SelfSearchWebViewClient extends WebViewClient {
             m.showFragment(f);
             return true;
         } else if (url.startsWith("intent")) {
-            String decodedUrl = URLDecoder.decode(url);
-            String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
-            view.loadUrl(newUrl);
+            try {
+                String decodedUrl = null;
+                decodedUrl = URLDecoder.decode(url, "utf-8");
+                String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
+                view.loadUrl(newUrl);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            return false;
         } else if (view.getUrl().startsWith("http://e22a.com/")) {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
-            return true;
+            return false;
         }
         return false;
     }
@@ -60,6 +72,7 @@ public class SelfSearchWebViewClient extends WebViewClient {
         tV.post(new Runnable() {
             @Override
             public void run() {
+                Log.d("WebView", "SelfSearch js run " + key);
                 tV.loadUrl("javascript:doWork('" + key + "')");
             }
         });
