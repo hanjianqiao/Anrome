@@ -23,6 +23,8 @@ public class TaobaoMainWebViewClient extends WebViewClient {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
             return false;
+        } else if (url.startsWith("tmall://")) {
+            return false;
         } else if (url.startsWith("https://a.m.taobao.com/i")) {
             Log.d("WebView", "a.m.taobao load " + url.substring(24));
             String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(24, url.indexOf(".htm?"));

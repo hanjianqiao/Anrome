@@ -155,6 +155,7 @@ public class LanWebAppInterface {
     @JavascriptInterface
     public String getDataFromUrl(String address, String callback) throws Exception {
         Log.d("WebView", " from " + address);
+        showAlert("fist get: ", address);
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
         int len;
@@ -171,6 +172,7 @@ public class LanWebAppInterface {
         inStream.close();
         String str = new String(outStream.toByteArray());//通过out.Stream.toByteArray获取到写的数据
         Log.d("webview from" + address, str);
+        showAlert("then get: ", str);
         return str;
     }
 
