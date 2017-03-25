@@ -43,7 +43,13 @@ function callBack(html, url){
         lastStage0("");
     }else{
         //LanJsBridge.callInMain("lastStage1", "");
-        lastStage1("");
+        if(query_type == '0'){
+            nowLoad = -20;
+            query_type = '1';
+            loadMore();
+        }else{
+            lastStage1("");
+        }
     }
 }
 
