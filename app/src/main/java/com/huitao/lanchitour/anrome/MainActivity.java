@@ -17,6 +17,7 @@
 package com.huitao.lanchitour.anrome;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -31,6 +32,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -50,6 +52,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import static com.huitao.lanchitour.anrome.Global.PREFS_NAME;
 
 public class MainActivity extends BackStackActivity implements BottomNavigationBar.OnTabSelectedListener {
     private static final String STATE_CURRENT_TAB_ID = "current_tab_id";
@@ -121,6 +125,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
             showFragment(rootTabFragment(MAIN_TAB_ID));
         }
         Global.start(this);
+        SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, 0);
+        String savedCookie = settings.getString("alimama_cookie", "");
+        if (!savedCookie.equals("")) {
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setCookie("http://pub.alimama.com/", savedCookie);
+        }
         final Runnable beeper = new Runnable() {
             public void run() {
                 try {
@@ -193,6 +203,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, 0);
+        String savedCookie = settings.getString("alimama_cookie", "");
+        if (!savedCookie.equals("")) {
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setCookie("http://pub.alimama.com/", savedCookie);
+        }
         curFragment = getSupportFragmentManager().findFragmentById(R.id.content);
         curTabId = savedInstanceState.getInt(STATE_CURRENT_TAB_ID);
         bottomNavBar.selectTab(curTabId, false);
@@ -200,6 +216,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        CookieManager cookieManager = CookieManager.getInstance();
+        String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
+        SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("alimama_cookie", newCookie);
+        editor.apply();
         outState.putInt(STATE_CURRENT_TAB_ID, curTabId);
         super.onSaveInstanceState(outState);
     }
@@ -234,6 +256,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
             backTo(f);
         } else {
             if (doubleBackToExitPressedOnce) {
+                CookieManager cookieManager = CookieManager.getInstance();
+                String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
+                SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("alimama_cookie", newCookie);
+                editor.apply();
                 super.onBackPressed();
                 return;
             }

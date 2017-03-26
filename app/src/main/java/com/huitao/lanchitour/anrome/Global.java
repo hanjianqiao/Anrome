@@ -22,6 +22,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 
 public class Global {
+    public static final String PREFS_NAME = "MyPrefsFile";
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     public static int version = 7;
     public static MainActivity m;
