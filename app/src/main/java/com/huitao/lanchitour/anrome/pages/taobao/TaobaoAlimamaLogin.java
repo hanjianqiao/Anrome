@@ -1,4 +1,4 @@
-package com.huitao.lanchitour.anrome.pages.self;
+package com.huitao.lanchitour.anrome.pages.taobao;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,30 +18,29 @@ import com.huitao.lanchitour.anrome.pages.supports.jsbridge.LanWebAppInterface;
  * Created by hanji on 2017/3/9.
  */
 
-public class SelfSearch extends Fragment {
-    public static final String ARG_KEY = "item";
+public class TaobaoAlimamaLogin extends Fragment {
     public WebView mainView;
-    private String key = "";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        key = getArguments().getString(ARG_KEY);
-        View v = inflater.inflate(R.layout.self_layout_search, container, false);
-        Button bt_back = (Button) v.findViewById(R.id.self_search_bt_back);
+        View v = inflater.inflate(R.layout.taobao_layout_login_alimama, container, false);
 
-        bt_back.setOnClickListener(new View.OnClickListener() {
+        Button bt_home = (Button) v.findViewById(R.id.taobao_login_alimama_bt_back);
+
+        bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
             }
         });
-        mainView = (WebView) v.findViewById(R.id.webview_self_search);
+        mainView = (WebView) v.findViewById(R.id.taobao_login_alimama_webview);
         mainView.getSettings().setJavaScriptEnabled(true);
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);
         mainView.getSettings().setDatabaseEnabled(true);
+
         mainView.getSettings().setAppCacheEnabled(false);
         mainView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         //页面大小
@@ -56,9 +55,9 @@ public class SelfSearch extends Fragment {
         mainView.setScaleX(1.0f);
 
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
-        mainView.setWebViewClient(new SelfSearchWebViewClient((MainActivity) getActivity(), key));
+        mainView.setWebViewClient(new TaobaoAlimamaLoginClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
-        mainView.loadUrl("file:///android_asset/sys_h5/search.html");
+        mainView.loadUrl("http://alimama.com/");
 
         return v;
     }

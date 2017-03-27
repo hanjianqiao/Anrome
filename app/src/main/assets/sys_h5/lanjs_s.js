@@ -47,7 +47,7 @@ function updateGeneralBrokerageItemCallBack(htmlText, url){
             document.getElementById("plantable").appendChild(item);
         }
     }catch(err){
-        document.getElementById("plantitle").innerHTML = "请<a href=\"http://www.alimama.com/\" style=\"color:red\"><b>登陆</b></a>后查看详情";
+        document.getElementById("plantitle").innerHTML = "请<a href=\"alimama:login\" style=\"color:red\"><b>登陆</b></a>后查看详情";
     }
 }
 

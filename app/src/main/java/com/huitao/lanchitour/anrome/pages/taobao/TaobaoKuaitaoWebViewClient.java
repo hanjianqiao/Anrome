@@ -28,7 +28,11 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
 
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
-        if (url.startsWith("http")) {
+        if (url.startsWith("alimama")) {
+            view.stopLoading();
+            TaobaoAlimamaLogin f = new TaobaoAlimamaLogin();
+            m.showFragment(f);
+            return false;
             //view.loadUrl(url);
         } else if (url.startsWith("intent")) {
             String decodedUrl = URLDecoder.decode(url);

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 
@@ -42,6 +43,8 @@ public class ShopTaobaoDetail extends Fragment {
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);
         mainView.getSettings().setDatabaseEnabled(true);
+        mainView.getSettings().setAppCacheEnabled(false);
+        mainView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         //页面大小
         mainView.getSettings().setUseWideViewPort(true);
         mainView.getSettings().setLoadWithOverviewMode(true);
