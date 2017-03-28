@@ -33,6 +33,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -128,6 +129,10 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
         SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, 0);
         String savedCookie = settings.getString("alimama_cookie", "");
         if (!savedCookie.equals("")) {
+            Log.d("WebView", "OS Andoird API: " + android.os.Build.VERSION.SDK_INT);
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                CookieSyncManager.createInstance(this);
+            }
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setCookie("http://pub.alimama.com/", savedCookie);
         }
