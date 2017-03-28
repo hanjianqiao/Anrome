@@ -40,7 +40,7 @@ function updateGeneralBrokerageItemCallBack(htmlText, url){
             }catch(e){
                 break;
             }
-            innerText += "<a href=\"http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"\"";
+            innerText += "<a href=\"http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1\"";
             innerText += "<button class=\"btn_02\">申请计划</button></a></td>";
             var item = document.createElement("tr");
             item.innerHTML = innerText;
@@ -122,7 +122,7 @@ function updateQueqiaoBrokerageCallBack(htmlText, url){
     }catch(e){
         document.getElementById("queqiaorate").innerHTML = (showIt ? '0%' : "??%");
     }
-    document.getElementById("genlick").href = (showIt ? ((jo.eventRate || jo.eventRate == '0') ? ("http://pub.alimama.com/promo/item/channel/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&channel=qqhd") : ("http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid)) : "");
+    document.getElementById("genlick").href = (showIt ? ((jo.eventRate || jo.eventRate == '0') ? ("http://pub.alimama.com/promo/item/channel/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&channel=qqhd&yxjh=-1") : ("http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1")) : "");
     try {
         if(showIt){
             updateQueqiaoBrokerageItem(goodid);
