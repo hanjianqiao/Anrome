@@ -57,7 +57,7 @@ public class TaobaoAlimamaLogin extends Fragment {
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
         mainView.setWebViewClient(new TaobaoAlimamaLoginClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
-        mainView.loadUrl("http://alimama.com/");
+        mainView.loadUrl("https://login.m.taobao.com/login.htm?redirectURL=http%3A%2F%2Fwww.alimama.com&loginFrom=wap_alimama");
 
         return v;
     }

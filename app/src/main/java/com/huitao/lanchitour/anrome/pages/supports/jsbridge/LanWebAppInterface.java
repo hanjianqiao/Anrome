@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
 import com.huitao.lanchitour.anrome.Global;
 import com.huitao.lanchitour.anrome.pages.supports.http.PostGetJson;
@@ -20,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.UUID;
@@ -164,14 +166,37 @@ public class LanWebAppInterface {
         CookieManager cookieManager = CookieManager.getInstance();
         String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Cookie", newCookie);
-        InputStream inStream = conn.getInputStream();
-        while ((len = inStream.read(data)) != -1) {
-            outStream.write(data, 0, len);
+        String str = "";
+        try {
+            conn.setConnectTimeout(4000);
+            conn.setReadTimeout(10000);
+            conn.setRequestProperty("Cookie", newCookie);
+            InputStream inStream = conn.getInputStream();
+            while ((len = inStream.read(data)) != -1) {
+                outStream.write(data, 0, len);
+            }
+            inStream.close();
+            str = new String(outStream.toByteArray());//通过out.Stream.toByteArray获取到写的数据
+            Log.d("webview from" + address, str);
+        } catch (SocketTimeoutException e) {
+            if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
+                Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
+            } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
+                Toast.makeText(mContext, "您的网络质量低，请稍后再试", Toast.LENGTH_SHORT).show();
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+                alertDialog.setTitle("请截图发给客服");
+                alertDialog.setMessage(e.toString());
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+            Log.d("WebView", e.toString());
         }
-        inStream.close();
-        String str = new String(outStream.toByteArray());//通过out.Stream.toByteArray获取到写的数据
-        Log.d("webview from" + address, str);
         //showAlert("then get: ", str);
         return str;
     }
