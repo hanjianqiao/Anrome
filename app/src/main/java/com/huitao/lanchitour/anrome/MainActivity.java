@@ -332,7 +332,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                 if (!Global.isVip()) {
                     bottomNavBar.selectTab(3, false);
                     AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                    alertDialog.setTitle("您不是VIP");
+                    alertDialog.setTitle("您不是VIP，无法使用查询功能");
                     alertDialog.setMessage("");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {
@@ -348,7 +348,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                 if (!Global.isVip()) {
                     bottomNavBar.selectTab(3, false);
                     AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                    alertDialog.setTitle("您不是VIP");
+                    alertDialog.setTitle("您不是VIP，无法使用推荐商城");
                     alertDialog.setMessage("");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {
@@ -364,7 +364,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                 if (!Global.isVip()) {
                     bottomNavBar.selectTab(3, false);
                     AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                    alertDialog.setTitle("您不是VIP");
+                    alertDialog.setTitle("您不是VIP，无法使用自选商城");
                     alertDialog.setMessage("");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {
@@ -378,7 +378,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                 if (!Global.upisVip()) {
                     bottomNavBar.selectTab(curTabId, false);
                     AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                    alertDialog.setTitle("您的上级：" + Global.parent + "不是VIP");
+                    alertDialog.setTitle("您的上级：" + Global.parent + "不是VIP，无法使用自选商城");
                     alertDialog.setMessage("");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {

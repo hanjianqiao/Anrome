@@ -1,7 +1,11 @@
 package com.huitao.lanchitour.anrome.pages.shop;
 
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,6 +37,20 @@ public class ShopDetailWebViewClient extends WebViewClient {
         }
         if (url.startsWith("http")) {
             //view.loadUrl(url);
+        } else if (url.startsWith("clipboard:")) {
+            ClipboardManager cmb = (ClipboardManager) m.getSystemService(Context.CLIPBOARD_SERVICE);
+            cmb.setText(url.substring(10));
+            AlertDialog alertDialog = new AlertDialog.Builder(m).create();
+            alertDialog.setTitle("复制成功");
+            alertDialog.setMessage(url.substring(10));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            return true;
         } else if (url.startsWith("huitao:")) {
             Log.d("WebView", "" + url.substring(7));
             Bundle args = new Bundle();

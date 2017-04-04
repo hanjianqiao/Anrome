@@ -13,11 +13,7 @@ function callBack(html, url){
 	document.getElementById("intro").innerHTML = jo.title;
 	document.getElementById("price").innerHTML = jo.price;
 	document.getElementById("introimg").src = jo.image;
-    if(showIt){
-        document.getElementById("selllink").href = "huitao:http://pub.alimama.com/promo/item/channel/index.htm?q="+encodeURIComponent(jo.url)+"&channel=qqhd";
-    }else{
-        document.getElementById("selllink").onclick = notVip;
-    }
+	document.getElementById("selllink").href = "clipboard:"+jo.url;
 	document.getElementById("taodetail").href = "ios:showTaobaoDetail:"+jo.url;
 }
 function doWork(q, isVip){
