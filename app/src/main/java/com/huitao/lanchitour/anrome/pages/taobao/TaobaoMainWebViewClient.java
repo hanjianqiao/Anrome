@@ -19,13 +19,11 @@ public class TaobaoMainWebViewClient extends WebViewClient {
             String decodedUrl = URLDecoder.decode(url);
             String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
             view.loadUrl(newUrl);
-            return false;
-        } else if (view.getUrl().startsWith("http://e22a.com/")) {
-            String newUrl = "http" + url.substring(6, url.length());
-            view.loadUrl(newUrl);
+            return true;
+        } else if (url.startsWith("http")) {
             return false;
         } else if (url.startsWith("tmall://")) {
-            return false;
+            return true;
         } else if (url.startsWith("https://a.m.taobao.com/i")) {
             Log.d("WebView", "a.m.taobao load " + url.substring(24));
 
@@ -33,7 +31,7 @@ public class TaobaoMainWebViewClient extends WebViewClient {
                 String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(24, url.indexOf(".htm?"));
                 view.loadUrl(newUrl);
             }
-            return false;
+            return true;
         } else if (url.startsWith("taobao://")) {
             Log.d("WebView", "taobao: a.m.taobao load " + url);
             if (url.startsWith("taobao://h5.m.taobao.com/awp/core/detail.htm?")) {
@@ -54,7 +52,7 @@ public class TaobaoMainWebViewClient extends WebViewClient {
                 String newUrl = "http" + url.substring(6, url.length());
                 view.loadUrl(newUrl);
             }
-            return false;
+            return true;
         } else if (view.getUrl().startsWith("http://c.b1wt.com/")) {
             String newUrl = "https://item.taobao.com/item.htm?id=";
             if (url.indexOf("itemId=") > 0) {
@@ -68,9 +66,8 @@ public class TaobaoMainWebViewClient extends WebViewClient {
 
             }
             Log.d("WebView", "TaobaoMainWebViewClient load to " + newUrl);
-            return false;
+            return true;
         }
-        view.loadUrl(url);
         return false;
     }
 
