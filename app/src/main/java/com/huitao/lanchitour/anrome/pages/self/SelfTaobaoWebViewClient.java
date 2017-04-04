@@ -28,21 +28,6 @@ public class SelfTaobaoWebViewClient extends WebViewClient {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        if (url.startsWith("intent")) {
-            try {
-                String decodedUrl = null;
-                decodedUrl = URLDecoder.decode(url, "utf-8");
-                String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
-                view.loadUrl(newUrl);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            return false;
-        } else if (view.getUrl().startsWith("http://e22a.com/")) {
-            String newUrl = "http" + url.substring(6, url.length());
-            view.loadUrl(newUrl);
-            return false;
-        }
         return false;
     }
 
