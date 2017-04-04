@@ -26,6 +26,7 @@ public class Global {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     public static int version = 7;
     public static MainActivity m;
+    public static String parent = "";
     public static String username = "";
     public static String password = "";
     public static boolean isLoggedIn = false;
@@ -33,6 +34,9 @@ public class Global {
     public static int endYear = 0;
     public static int endMonth = 0;
     public static int endDay = 0;
+    public static int uendYear = 0;
+    public static int uendMonth = 0;
+    public static int uendDay = 0;
     public static int newMessage = 0;
     public static ScheduledFuture<?> beeperHandle;
     public static String regUserName = "";
@@ -45,6 +49,17 @@ public class Global {
     public static BottomNavigationItem shop;
     public static BottomNavigationItem self;
     public static BottomNavigationItem user;
+
+    public static boolean upisVip() {
+        Calendar calendar = Calendar.getInstance();
+        boolean Y = (uendYear < calendar.get(Calendar.YEAR));
+        boolean YE = (uendYear == (calendar.get(Calendar.YEAR)));
+        boolean M = (uendMonth < calendar.get(Calendar.MONTH));
+        boolean ME = (uendMonth == (calendar.get(Calendar.MONTH)));
+        boolean D = (uendDay < calendar.get(Calendar.DAY_OF_MONTH));
+        Log.d("WebView", "u" + Y + YE + M + ME + D);
+        return !(Y || (YE && M) || (YE && ME && D));
+    }
 
     public static boolean isVip() {
         Calendar calendar = Calendar.getInstance();

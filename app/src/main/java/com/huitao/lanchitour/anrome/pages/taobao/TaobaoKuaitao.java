@@ -58,8 +58,8 @@ public class TaobaoKuaitao extends Fragment {
         // 开启DOM缓存。
         mainView.getSettings().setDomStorageEnabled(true);
         mainView.getSettings().setDatabaseEnabled(true);
-        mainView.getSettings().setAppCacheEnabled(false);
-        mainView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        mainView.getSettings().setAppCacheEnabled(true);
+        mainView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         //页面大小
         mainView.getSettings().setUseWideViewPort(true);
         mainView.getSettings().setLoadWithOverviewMode(true);

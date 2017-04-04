@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
@@ -76,6 +77,8 @@ public class TaobaoMain extends Fragment {
         //页面大小
         mainView.getSettings().setUseWideViewPort(true);
         mainView.getSettings().setLoadWithOverviewMode(true);
+        mainView.getSettings().setAppCacheEnabled(true);
+        mainView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         //zoom
         mainView.getSettings().setBuiltInZoomControls(true);
         mainView.getSettings().setDisplayZoomControls(false);

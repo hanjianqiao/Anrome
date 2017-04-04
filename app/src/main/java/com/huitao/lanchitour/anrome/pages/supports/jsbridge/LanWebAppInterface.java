@@ -184,16 +184,7 @@ public class LanWebAppInterface {
             } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
                 Toast.makeText(mContext, "您的网络质量低，请稍后再试", Toast.LENGTH_SHORT).show();
             } else {
-                AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
-                alertDialog.setTitle("请截图发给客服");
-                alertDialog.setMessage(e.toString());
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
+                Toast.makeText(mContext, "您的网络可能存在问题，请稍后再试", Toast.LENGTH_SHORT).show();
             }
             Log.d("WebView", e.toString());
         }
@@ -280,13 +271,14 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在登录...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/login", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/login0", jsonData.toString());
         alertDialog.dismiss();
         if (jo == null) {
             return "网络异常";
         }
         if (jo.getString("status").equals("ok")) {
             JSONObject userInfo = new JSONObject(jo.getString("data"));
+            Global.parent = userInfo.getString("parent");
             Global.username = userInfo.getString("user_id");
             Global.password = password;
             Global.isLoggedIn = true;
@@ -294,6 +286,9 @@ public class LanWebAppInterface {
             Global.endYear = Integer.valueOf(userInfo.getString("expire_year"));
             Global.endMonth = Integer.valueOf(userInfo.getString("expire_month"));
             Global.endDay = Integer.valueOf(userInfo.getString("expire_day"));
+            Global.uendYear = Integer.valueOf(userInfo.getString("uexpire_year"));
+            Global.uendMonth = Integer.valueOf(userInfo.getString("uexpire_month"));
+            Global.uendDay = Integer.valueOf(userInfo.getString("uexpire_day"));
             return "ok";
         }
         Log.d("WebView", jo.getString("status"));

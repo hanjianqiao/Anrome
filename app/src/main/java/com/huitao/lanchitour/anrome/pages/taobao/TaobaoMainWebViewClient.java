@@ -13,6 +13,7 @@ import java.net.URLDecoder;
 
 public class TaobaoMainWebViewClient extends WebViewClient {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        url = URLDecoder.decode(url);
         Log.d("WebView", "TaobaoMainWebViewClient Redirect to " + url);
         if (url.startsWith("intent")) {
             String decodedUrl = URLDecoder.decode(url);
@@ -27,13 +28,24 @@ public class TaobaoMainWebViewClient extends WebViewClient {
             return false;
         } else if (url.startsWith("https://a.m.taobao.com/i")) {
             Log.d("WebView", "a.m.taobao load " + url.substring(24));
-            String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(24, url.indexOf(".htm?"));
-            view.loadUrl(newUrl);
+
+            if (!view.getUrl().startsWith("http")) {
+                String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(24, url.indexOf(".htm?"));
+                view.loadUrl(newUrl);
+            }
             return false;
         } else if (url.startsWith("taobao://")) {
+            Log.d("WebView", "taobao: a.m.taobao load " + url);
             if (url.startsWith("taobao://h5.m.taobao.com/awp/core/detail.htm?")) {
                 String newUrl = "http://h5.m.taobao.com/awp/core/detail.htm?" + url.substring(url.indexOf("detail.htm?") + 11, url.length());
                 if (!view.getUrl().startsWith("http://h5.m.taobao.com/awp/core/detail.htm?")) {
+                    view.loadUrl(newUrl);
+                } else {
+
+                }
+            } else if (url.startsWith("taobao://a.m.taobao.com/i")) {
+                String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(25, url.indexOf(".htm?"));
+                if (!view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
                     view.loadUrl(newUrl);
                 } else {
 
@@ -44,9 +56,18 @@ public class TaobaoMainWebViewClient extends WebViewClient {
             }
             return false;
         } else if (view.getUrl().startsWith("http://c.b1wt.com/")) {
-            String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(url.indexOf("itemId=") + 7, url.length());
+            String newUrl = "https://item.taobao.com/item.htm?id=";
+            if (url.indexOf("itemId=") > 0) {
+                newUrl += url.substring(url.indexOf("itemId=") + 7, url.length());
+            } else {
+                newUrl = url;
+            }
+            if (!view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
+                view.loadUrl(newUrl);
+            } else {
+
+            }
             Log.d("WebView", "TaobaoMainWebViewClient load to " + newUrl);
-            view.loadUrl(newUrl);
             return false;
         }
         view.loadUrl(url);

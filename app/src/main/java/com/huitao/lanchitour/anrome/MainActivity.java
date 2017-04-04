@@ -327,6 +327,70 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
             alertDialog.show();
             return;
         }
+        switch (position) {
+            case 0:
+                if (!Global.isVip()) {
+                    bottomNavBar.selectTab(3, false);
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("您不是VIP");
+                    alertDialog.setMessage("");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
+                break;
+            case 1:
+                if (!Global.isVip()) {
+                    bottomNavBar.selectTab(3, false);
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("您不是VIP");
+                    alertDialog.setMessage("");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
+                break;
+            case 2:
+                if (!Global.isVip()) {
+                    bottomNavBar.selectTab(3, false);
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("您不是VIP");
+                    alertDialog.setMessage("");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
+                if (!Global.upisVip()) {
+                    bottomNavBar.selectTab(curTabId, false);
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("您的上级：" + Global.parent + "不是VIP");
+                    alertDialog.setMessage("");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
+                break;
+        }
         if (curFragment != null) {
             switch (curTabId) {
                 case 0:
