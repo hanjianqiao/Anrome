@@ -110,6 +110,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                                         dialog.dismiss();
                                     }
                                 });
+                        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+
+                            }
+                        });
                         alertDialog.show();
                         break;
                     default:
