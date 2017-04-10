@@ -37,7 +37,7 @@
 			nums = nums + 1;
 			var price = 168 * nums;
             document.getElementById("nums").innerHTML = nums.toString();
-            if(LanJsBridge.userLevel() == "user"){
+            if(LanJsBridge.userLevel() == "user" || LanJsBridge.userLevel() == "vip"){
                 document.getElementById("price").innerHTML = price.toString();
             }else{
                 document.getElementById("price").innerHTML = "将从您的续费套餐扣除";
@@ -50,7 +50,7 @@
 			nums = nums - 1;
 			var price = 168 * nums;
             document.getElementById("nums").innerHTML = nums.toString();
-            if(LanJsBridge.userLevel() == "user"){
+            if(LanJsBridge.userLevel() == "user" || LanJsBridge.userLevel() == "vip"){
                 document.getElementById("price").innerHTML = price.toString();
             }else{
                 document.getElementById("price").innerHTML = "将从您的续费套餐扣除";
@@ -96,7 +96,7 @@
 </body>
 <script>
     function updateDisplay(a, b, c){
-        if(LanJsBridge.userLevel() == "user"){
+        if(LanJsBridge.userLevel() == "user" || LanJsBridge.userLevel() == "vip"){
             document.getElementById("price").innerHTML = "168";
         }else{
             document.getElementById("price").innerHTML = "将从您的续费套餐扣除";
