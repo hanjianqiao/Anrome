@@ -14,17 +14,15 @@
 		document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
 		document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
 
-
-
     </script>
 </head>
 
 <body>
 <!-- 布局 -->
 <section>
-    <!-- 余额 -->
+    <!-- 余额
     <div class="topBox">
-        <div class="topCenter">
+    <div class="topCenter">
             <div class="agentLeft">
                 <p class="fontA">邀请次数（次）</p>
                 <p class="font5" id="inv"></p>
@@ -34,14 +32,20 @@
                 <p class="fontA">续费次数（次）</p>
                 <p class="font5" id="ext"></p>
             </div>
-        </div>
-        <a href="agent-pay.html">
-            <button class="btnTop">购买套餐</button>
-        </a>
     </div>
-
+    <a href="agent-pay.html">
+        <button class="btnTop">购买套餐</button>
+    </a>
+    </div>
+    -->
     <!-- bill  开始 -->
     <ul class="bill">
+        <li class="bill02">
+            <img src="icon04.png" alt="" class="fl imgAgent">
+            <span class="fl">您的级别</span>
+            <span class="fr font5" id="level"></span>
+        </li>
+
         <li class="bill02">
             <img src="icon04.png" alt="" class="fl imgAgent">
             <span class="fl">总邀请（人）</span>
@@ -54,16 +58,15 @@
             <span class="fr font5" id="vip"></span>
         </li>
 
-        <li class="bill02">
-            <img src="icon04.png" alt="" class="fl imgAgent">
-            <span class="fl">邀请代理（人）</span>
-            <span class="fr font5" id="age"></span>
-        </li>
-
         <li class="bill02 borderClear">
             <img src="icon04.png" alt="" class="fl imgAgent">
-            <span class="fl">团队总人数</span>
-            <span class="fr font5" id="tea"></span>
+            <span class="fl">本月邀请会员数</span>
+            <span class="fr font5" id="newvip"></span>
+        </li>
+        <li class="bill02 borderClear">
+            <img src="icon04.png" alt="" class="fl imgAgent">
+            <span class="fl">本月邀请续费数</span>
+            <span class="fr font5" id="newextend"></span>
         </li>
     </ul>
 </section>
