@@ -56,6 +56,47 @@ public class TaobaoMainWebViewClient extends WebViewClient {
 
                 }
             }
+        } else if (view.getUrl() != null && view.getUrl().startsWith("http://c.b6wq.com/")) {
+            if (url.startsWith("https://a.m.taobao.com/i")) {
+                Log.d("WebView", "a.m.taobao load " + url.substring(24));
+
+                if (!view.getUrl().startsWith("http")) {
+                    String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(24, url.indexOf(".htm?"));
+                    view.loadUrl(newUrl);
+                }
+            } else if (url.startsWith("taobao://")) {
+                Log.d("WebView", "taobao: a.m.taobao load " + url);
+                if (url.startsWith("taobao://h5.m.taobao.com/awp/core/detail.htm?")) {
+                    String newUrl = "http://h5.m.taobao.com/awp/core/detail.htm?" + url.substring(url.indexOf("detail.htm?") + 11, url.length());
+                    if (!view.getUrl().startsWith("http://h5.m.taobao.com/awp/core/detail.htm?")) {
+                        view.loadUrl(newUrl);
+                    } else {
+
+                    }
+                } else if (url.startsWith("taobao://a.m.taobao.com/i")) {
+                    String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(25, url.indexOf(".htm?"));
+                    if (!view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
+                        view.loadUrl(newUrl);
+                    } else {
+
+                    }
+                } else {
+                    String newUrl = "http" + url.substring(6, url.length());
+                    view.loadUrl(newUrl);
+                }
+            } else {
+                String newUrl = "https://item.taobao.com/item.htm?id=";
+                if (url.indexOf("itemId=") > 0) {
+                    newUrl += url.substring(url.indexOf("itemId=") + 7, url.length());
+                } else {
+                    newUrl = url;
+                }
+                if (!view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
+                    view.loadUrl(newUrl);
+                } else {
+
+                }
+            }
         } else if (view.getUrl() != null && view.getUrl().toLowerCase().startsWith("http")) {
             if (url.startsWith("http")) {
                 return false;
