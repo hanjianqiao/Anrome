@@ -5,6 +5,8 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.huitao.lanchitour.anrome.MainActivity;
+
 import java.net.URLDecoder;
 
 /**
@@ -12,10 +14,50 @@ import java.net.URLDecoder;
  */
 
 public class TaobaoMainWebViewClient extends WebViewClient {
+    private MainActivity m;
+
+    public TaobaoMainWebViewClient(MainActivity m) {
+        this.m = m;
+    }
+
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         url = URLDecoder.decode(url);
         Log.d("WebView", "" + view.getUrl() + ", TaobaoMainWebViewClient Redirect to " + url);
-        if (view.getUrl() != null && view.getUrl().startsWith("http://c.b1wt.com/")) {
+        if (url.startsWith("taobao://")) {
+            if (view.getUrl() != null) {
+                if (view.getUrl().startsWith("http://h5.m.taobao.com/awp/core/detail.htm?") || view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
+                    return true;
+                }
+            }
+            if (url.startsWith("taobao://h5.m.taobao.com/awp/core/detail.htm?")) {
+                String newUrl = "http://h5.m.taobao.com/awp/core/detail.htm?" + url.substring(url.indexOf("detail.htm?") + 11, url.length());
+                if (!view.getUrl().startsWith("http://h5.m.taobao.com/awp/core/detail.htm?")) {
+                    view.loadUrl(newUrl);
+                } else {
+
+                }
+            } else if (url.startsWith("taobao://a.m.taobao.com/i")) {
+                String newUrl = "https://item.taobao.com/item.htm?id=" + url.substring(25, url.indexOf(".htm?"));
+                if (!view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
+                    view.loadUrl(newUrl);
+                } else {
+
+                }
+            } else {
+//                AlertDialog alertDialog = new AlertDialog.Builder(m).create();
+//                alertDialog.setTitle("请截图发给客服");
+//                alertDialog.setMessage("From Webview url: " + view.getUrl() + "\nLoad url: " + url);
+//                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//                alertDialog.show();
+                String newUrl = "http" + url.substring(6, url.length());
+                view.loadUrl(newUrl);
+            }
+        } else if (view.getUrl() != null && view.getUrl().startsWith("http://c.b1wt.com/")) {
             if (url.startsWith("https://a.m.taobao.com/i")) {
                 Log.d("WebView", "a.m.taobao load " + url.substring(24));
 

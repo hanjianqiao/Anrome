@@ -88,7 +88,7 @@ public class TaobaoMain extends Fragment {
         mainView.setScaleX(1.0f);
 
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
-        mainView.setWebViewClient(new TaobaoMainWebViewClient());
+        mainView.setWebViewClient(new TaobaoMainWebViewClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
         mainView.loadUrl(target);
 
