@@ -123,7 +123,7 @@
 		var code = document.getElementById('code');
 		var qq = document.getElementById('qq');
 		var wechat = document.getElementById('wechat');
-		LanJsBridge.setRegInfo(code.value, wechat.value, qq.valut);
+		LanJsBridge.setRegInfo(code.value, wechat.value, qq.value);
 		var ret = LanJsBridge.register();
 		if(ret == 'ok'){
 			window.location.href = 'register-success.html';
