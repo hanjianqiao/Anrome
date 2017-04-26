@@ -19,12 +19,15 @@ import com.huitao.lanchitour.anrome.pages.supports.jsbridge.LanWebAppInterface;
  */
 
 public class TaobaoAlimamaLogin extends Fragment {
+    public static final String ARG_ITEM = "item";
     public WebView mainView;
+    private String target = "";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        target = getArguments().getString(ARG_ITEM);
         View v = inflater.inflate(R.layout.taobao_layout_login_alimama, container, false);
 
         Button bt_home = (Button) v.findViewById(R.id.taobao_login_alimama_bt_back);
@@ -56,7 +59,7 @@ public class TaobaoAlimamaLogin extends Fragment {
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
         mainView.setWebViewClient(new TaobaoAlimamaLoginClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
-        mainView.loadUrl("https://login.taobao.com/member/login.jhtml?style=mini&newMini2=true&css_style=alimama&from=alimama&redirectURL=http%253A%252F%252Fwww.alimama.com&full_redirect=true&disableQuickLogin=true");
+        mainView.loadUrl(target);
 
         return v;
     }

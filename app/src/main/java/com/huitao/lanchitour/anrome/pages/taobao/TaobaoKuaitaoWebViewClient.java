@@ -1,6 +1,7 @@
 package com.huitao.lanchitour.anrome.pages.taobao;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,7 +31,19 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
         Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
         if (url.startsWith("alimama")) {
             view.stopLoading();
+            Bundle args = new Bundle();
+            args.putString(TaobaoAlimamaLogin.ARG_ITEM, "https://login.taobao.com/member/login.jhtml?style=mini&newMini2=true&css_style=alimama&from=alimama&redirectURL=http%253A%252F%252Fwww.alimama.com&full_redirect=true&disableQuickLogin=true");
             TaobaoAlimamaLogin f = new TaobaoAlimamaLogin();
+            f.setArguments(args);
+            m.showFragment(f);
+            return false;
+            //view.loadUrl(url);
+        } else if (url.startsWith("logintaobao")) {
+            view.stopLoading();
+            Bundle args = new Bundle();
+            args.putString(TaobaoAlimamaLogin.ARG_ITEM, "https://login.m.taobao.com/login.htm");
+            TaobaoAlimamaLogin f = new TaobaoAlimamaLogin();
+            f.setArguments(args);
             m.showFragment(f);
             return false;
             //view.loadUrl(url);

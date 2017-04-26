@@ -164,19 +164,23 @@ public class LanWebAppInterface {
         URL url = new URL(address);
         Log.d("WebView", "URL address is " + url.toString());
         CookieManager cookieManager = CookieManager.getInstance();
-        String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
+        String newCookie = cookieManager.getCookie(address);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         String str = "";
+        String encodingType = "UTF-8";
         try {
             conn.setConnectTimeout(4000);
             conn.setReadTimeout(10000);
             conn.setRequestProperty("Cookie", newCookie);
             InputStream inStream = conn.getInputStream();
+            if (conn.getHeaderField("Content-Type").contains("GBK")) {
+                encodingType = "GBK";
+            }
             while ((len = inStream.read(data)) != -1) {
                 outStream.write(data, 0, len);
             }
             inStream.close();
-            str = new String(outStream.toByteArray());//通过out.Stream.toByteArray获取到写的数据
+            str = new String(outStream.toByteArray(), encodingType);//通过out.Stream.toByteArray获取到写的数据
             Log.d("webview from" + address, str);
         } catch (SocketTimeoutException e) {
             if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
