@@ -139,8 +139,8 @@ public class TaobaoMainWebViewClient extends WebViewClient {
 
                 }
             }
-        } else if (view.getUrl() != null && view.getUrl().toLowerCase().startsWith("http")) {
-            if (url.startsWith("http")) {
+        } else if ((view.getUrl() != null && view.getUrl().toLowerCase().startsWith("http")) || url.toLowerCase().startsWith("http")) {
+            if (url.toLowerCase().startsWith("http")) {
                 return false;
             }
         }

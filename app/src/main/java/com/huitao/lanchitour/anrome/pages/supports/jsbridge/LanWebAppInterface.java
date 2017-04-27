@@ -24,6 +24,8 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
@@ -175,6 +177,64 @@ public class LanWebAppInterface {
             InputStream inStream = conn.getInputStream();
             if (conn.getHeaderField("Content-Type").contains("GBK")) {
                 encodingType = "GBK";
+            }
+            Map<String, List<String>> allHeaderFileds = conn.getHeaderFields();
+            List<String> setCookies = allHeaderFileds.get("Set-Cookie");
+            if (setCookies != null) {
+                for (int i = 0; i < setCookies.size(); i++) {
+                    Log.d("WebView", address + " cookies" + i + ": " + setCookies.get(i));
+                    cookieManager.setCookie(address, setCookies.get(i));
+                }
+            }
+            while ((len = inStream.read(data)) != -1) {
+                outStream.write(data, 0, len);
+            }
+            inStream.close();
+            str = new String(outStream.toByteArray(), encodingType);//通过out.Stream.toByteArray获取到写的数据
+            Log.d("webview from" + address, str);
+        } catch (SocketTimeoutException e) {
+            if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
+                Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
+            } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
+                Toast.makeText(mContext, "您的网络质量低，请稍后再试", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, "您的网络可能存在问题，请稍后再试", Toast.LENGTH_SHORT).show();
+            }
+            Log.d("WebView", e.toString());
+        }
+        //showAlert("then get: ", str);
+        return str;
+    }
+
+    @JavascriptInterface
+    public String getDataFromUrlWithRefer(String address, String refer, String callback) throws Exception {
+        Log.d("WebView", " from " + address);
+        //showAlert("fist get: ", address);
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] data = new byte[10240];
+        int len;
+        URL url = new URL(address);
+        Log.d("WebView", "URL address is " + url.toString());
+        CookieManager cookieManager = CookieManager.getInstance();
+        String newCookie = cookieManager.getCookie(address);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        String str = "";
+        String encodingType = "UTF-8";
+        try {
+            conn.setConnectTimeout(4000);
+            conn.setReadTimeout(10000);
+            conn.setRequestProperty("Cookie", newCookie);
+            InputStream inStream = conn.getInputStream();
+            if (conn.getHeaderField("Content-Type").contains("GBK")) {
+                encodingType = "GBK";
+            }
+            Map<String, List<String>> allHeaderFileds = conn.getHeaderFields();
+            List<String> setCookies = allHeaderFileds.get("Set-Cookie");
+            if (setCookies != null) {
+                for (int i = 0; i < setCookies.size(); i++) {
+                    Log.d("WebView", address + " cookies" + i + ": " + setCookies.get(i));
+                    cookieManager.setCookie(address, setCookies.get(i));
+                }
             }
             while ((len = inStream.read(data)) != -1) {
                 outStream.write(data, 0, len);

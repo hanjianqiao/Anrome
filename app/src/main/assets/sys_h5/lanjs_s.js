@@ -263,7 +263,7 @@ function updateTKZSCoupon2ItemCallBack(htmlText, url){
 
 function updateTKZSCoupon2Item(sellerId, activityId){
     htmlText = LanJsBridge.getDataFromUrl("https://uland.taobao.com/cp/coupon?"+"itemId="+goodid+"&activityId="+activityId, "updateTKZSCoupon2ItemCallBack");
-    updateTKZSCoupon2ItemCallBack(htmlText, '');
+    updateTKZSCoupon2ItemCallBack(htmlText, "https://uland.taobao.com/cp/coupon?"+"itemId="+goodid+"&activityId="+activityId);
 }
 
 
@@ -286,6 +286,38 @@ function updateTKZSCoupon(){
     updateTKZSCouponCallBack(htmlText, "");
 }
 
+// Dataoke coupon
+function callBackgetDataokeInfo(htmlText, url){
+    str0 = htmlText.substring(htmlText.indexOf('activity_id=')+12, htmlText.length);
+    str0 = str0.substring(0, str0.indexOf('"'));
+    htmlText = LanJsBridge.getDataFromUrl("https://uland.taobao.com/cp/coupon?"+"itemId="+goodid+"&activityId="+str0, "updateTKZSCoupon2ItemCallBack");
+    updateTKZSCoupon2ItemCallBack(htmlText, "https://uland.taobao.com/cp/coupon?"+"itemId="+goodid+"&activityId="+str0);
+}
+
+function getDataokeInfo(dtkid){
+    htmlText = LanJsBridge.getDataFromUrl("http://www.dataoke.com/gettpl?gid="+dtkid, "callBackgetDataokeInfo");
+    callBackgetDataokeInfo(htmlText, '');
+}
+
+function callBackDataoke(htmlText, url){
+    if(htmlText.indexOf('goods-items_') > 0 && htmlText.indexOf('data_goodsid') > 0){
+        dataokeid = htmlText.substring(htmlText.indexOf('goods-items_')+12, htmlText.indexOf('data_goodsid')-2);
+        getDataokeInfo(dataokeid);
+    }
+}
+
+function updateDataokeCouponTwice(){
+    htmlText = LanJsBridge.getDataFromUrlWithRefer("http://www.dataoke.com/search/?keywords="+goodid+"&xuan=spid", "http://www.dataoke.com/search/?keywords="+goodid+"&xuan=spid", "callBackDataoke");
+    callBackDataoke(htmlText, '');
+}
+
+function updateDataokeCoupon(){
+    htmlText = LanJsBridge.getDataFromUrlWithRefer("http://www.dataoke.com/search/?keywords="+goodid+"&xuan=spid", "http://www.dataoke.com/search/?keywords="+goodid+"&xuan=spid", "updateDataokeCouponTwice");
+    updateDataokeCouponTwice();
+}
+
+function callBackNothing(htmlString, url){
+}
 
 function imgAutoFit(a, b){
     WebViewJavaScriptBridge1.test0();
@@ -312,13 +344,14 @@ function doWork(srcUrl, showit){
         return;
     }
     goodid = getGoodID(srcUrl);
-    
+
     //tbtoken = LanJsBridge.getCookie("_tb_token_", "http://pub.alimama.com/")
 
     updateGeneralBrokerage();
     updateQueqiaoBrokerage();
     updateTaobaoCoupon();
     updateTKZSCoupon();
+    updateDataokeCoupon();
 }
 
 function copyToken(any){
