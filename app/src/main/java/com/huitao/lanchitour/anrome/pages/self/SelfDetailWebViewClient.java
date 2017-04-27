@@ -39,10 +39,16 @@ public class SelfDetailWebViewClient extends WebViewClient {
             //view.loadUrl(url);
         } else if (url.startsWith("clipboard:")) {
             ClipboardManager cmb = (ClipboardManager) m.getSystemService(Context.CLIPBOARD_SERVICE);
-            cmb.setText(url.substring(10));
+            String decodedToken = "";
+            try {
+                decodedToken = URLDecoder.decode(url, "UTF-8").substring(10);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            cmb.setText(decodedToken);
             AlertDialog alertDialog = new AlertDialog.Builder(m).create();
             alertDialog.setTitle("复制成功");
-            alertDialog.setMessage(url.substring(10));
+            alertDialog.setMessage(decodedToken);
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

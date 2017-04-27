@@ -35,7 +35,7 @@ public class TaobaoAlimamaLogin extends Fragment {
         bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+                ((MainActivity)getActivity()).onBackPressedWithAction(1);
             }
         });
         mainView = (WebView) v.findViewById(R.id.taobao_login_alimama_webview);

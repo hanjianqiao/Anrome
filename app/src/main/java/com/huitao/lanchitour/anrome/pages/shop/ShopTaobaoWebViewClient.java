@@ -27,7 +27,7 @@ public class ShopTaobaoWebViewClient extends WebViewClient {
             String decodedUrl = URLDecoder.decode(url);
             String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
             view.loadUrl(newUrl);
-        } else if (view.getUrl().startsWith("http://e22a.com/")) {
+        } else if (view.getUrl() != null && view.getUrl().startsWith("http://e22a.com/")) {
             String newUrl = "http" + url.substring(6, url.length());
             view.loadUrl(newUrl);
             return true;

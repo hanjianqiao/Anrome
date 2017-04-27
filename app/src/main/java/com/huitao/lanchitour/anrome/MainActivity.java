@@ -41,6 +41,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.huitao.lanchitour.anrome.pages.self.Self;
 import com.huitao.lanchitour.anrome.pages.shop.Shop;
+import com.huitao.lanchitour.anrome.pages.taobao.TaobaoKuaitao;
 import com.huitao.lanchitour.anrome.pages.taobao.TaobaoWelcome;
 import com.huitao.lanchitour.anrome.pages.user.UserCenter;
 import com.jetradar.multibackstack.BackStackActivity;
@@ -55,6 +56,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import static com.huitao.lanchitour.anrome.Global.PREFS_NAME;
+import static java.lang.System.exit;
 
 public class MainActivity extends BackStackActivity implements BottomNavigationBar.OnTabSelectedListener {
     private static final String STATE_CURRENT_TAB_ID = "current_tab_id";
@@ -118,6 +120,24 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                         });
                         alertDialog.show();
                         break;
+                    case 2:
+                        AlertDialog alertDialogExit = new AlertDialog.Builder(Global.m).create();
+                        alertDialogExit.setTitle("紧急提示：");
+                        alertDialogExit.setMessage("本版本存在严重问题，请重新下载安装最新版本，下载地址请关注“小牛快淘”微信公众号，回复“最新版本”即可。");
+                        alertDialogExit.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialogExit.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                exit(0);
+                            }
+                        });
+                        alertDialogExit.show();
+                        break;
                     default:
                         super.handleMessage(inputMessage);
                 }
@@ -163,8 +183,10 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     JSONObject json = new JSONObject(stringToParse);
 
                     Log.d("WebView", "Current version is " + Global.version + " New version is " + json.getString("message"));
-
-                    if (Global.version < Integer.valueOf(json.getString("message"))) {
+                    if (Global.version < Integer.valueOf(json.getString("min"))) {
+                        Message message = Global.m.mHandler.obtainMessage(2);
+                        message.sendToTarget();
+                    }else if (Global.version < Integer.valueOf(json.getString("message"))) {
                         Message message = Global.m.mHandler.obtainMessage(1);
                         message.sendToTarget();
                     }
@@ -264,6 +286,58 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction tr = fm.beginTransaction();
             tr.remove(curFragment).commit();
+            backTo(f);
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                CookieManager cookieManager = CookieManager.getInstance();
+                String newCookie = cookieManager.getCookie("http://pub.alimama.com/");
+                SharedPreferences settings = this.getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("alimama_cookie", newCookie);
+                editor.apply();
+                super.onBackPressed();
+                return;
+            }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 1000);
+        }
+    }
+
+    public void onBackPressedWithAction(int action) {
+        //Pair<Integer, Fragment> pair = popFragmentFromBackStack();
+        Fragment f = null;
+        switch (curTabId) {
+            case 0:
+                if (!stack0.isEmpty())
+                    f = stack0.pop();
+                break;
+            case 1:
+                if (!stack1.isEmpty())
+                    f = stack1.pop();
+                break;
+            case 2:
+                if (!stack2.isEmpty())
+                    f = stack2.pop();
+                break;
+            case 3:
+                if (!stack3.isEmpty())
+                    f = stack3.pop();
+                break;
+        }
+        if (f != null) {
+            Log.d("Debugs:", "8");
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction tr = fm.beginTransaction();
+            tr.remove(curFragment).commit();
+            ((TaobaoKuaitao)f).doAction(action);
             backTo(f);
         } else {
             if (doubleBackToExitPressedOnce) {

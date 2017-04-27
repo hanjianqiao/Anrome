@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -82,4 +84,12 @@ public class TaobaoKuaitao extends Fragment {
         super.onDestroy();
     }
 
+    public void doAction(int action) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+            CookieSyncManager.getInstance().sync();
+        }else{
+            CookieManager.getInstance().flush();
+        }
+        mainView.reload();
+    }
 }
