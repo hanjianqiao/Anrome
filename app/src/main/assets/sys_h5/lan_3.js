@@ -14,11 +14,11 @@ function callBack(html, url){
 	document.getElementById("price").innerHTML = jo.price;
 	document.getElementById("introimg").src = jo.image;
 	if(jo.tb_token && jo.tb_token != ''){
-	    document.getElementById("selllink").href = "clipboard:"+jo.tb_token;
-	}
-	else{
-	    document.getElementById("selllink").href = "clipboard:"+jo.url;
-	}
+        document.getElementById("copytoken").href = "clipboard:"+jo.tb_token;
+    }else{
+        document.getElementById("btn_cptoken").innerHTML = "没有口令";
+    }
+    document.getElementById("selllink").href = "clipboard:"+jo.url;
 	document.getElementById("taodetail").href = "ios:showTaobaoDetail:"+jo.url;
 }
 function doWork(q, isVip){
