@@ -123,7 +123,7 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     case 2:
                         AlertDialog alertDialogExit = new AlertDialog.Builder(Global.m).create();
                         alertDialogExit.setTitle("紧急提示：");
-                        alertDialogExit.setMessage("本版本存在严重问题，请重新下载安装最新版本，下载地址请关注“小牛快淘”微信公众号，回复“最新版本”即可。");
+                        alertDialogExit.setMessage("为了更好的使用体验，请重新下载安装最新版本，下载地址请关注“小牛快淘”微信公众号，回复“最新版本”即可。");
                         alertDialogExit.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {

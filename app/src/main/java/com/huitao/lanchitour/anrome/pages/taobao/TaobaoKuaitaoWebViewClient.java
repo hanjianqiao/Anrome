@@ -32,7 +32,7 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
         if (url.startsWith("alimama")) {
             view.stopLoading();
             Bundle args = new Bundle();
-            args.putString(TaobaoAlimamaLogin.ARG_ITEM, "file:///android_asset/sys_h5/fate_login_alimama.html");
+            args.putString(TaobaoAlimamaLogin.ARG_ITEM, "http://shop.vsusvip.com:3123/fate_login_alimama.html");
             TaobaoAlimamaLogin f = new TaobaoAlimamaLogin();
             f.setArguments(args);
             m.showFragment(f);
