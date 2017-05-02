@@ -224,6 +224,7 @@ public class LanWebAppInterface {
             conn.setConnectTimeout(4000);
             conn.setReadTimeout(10000);
             conn.setRequestProperty("Cookie", newCookie);
+            conn.setRequestProperty("Referer", refer);
             InputStream inStream = conn.getInputStream();
             if (conn.getHeaderField("Content-Type").contains("GBK")) {
                 encodingType = "GBK";

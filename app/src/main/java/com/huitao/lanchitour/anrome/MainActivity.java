@@ -122,8 +122,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                         break;
                     case 2:
                         AlertDialog alertDialogExit = new AlertDialog.Builder(Global.m).create();
-                        alertDialogExit.setTitle("紧急提示：");
-                        alertDialogExit.setMessage("为了更好的使用体验，请重新下载安装最新版本，下载地址请关注“小牛快淘”微信公众号，回复“最新版本”即可。");
+                        alertDialogExit.setTitle("新版本提示：");
+                        if (inputMessage.obj != null && !inputMessage.obj.equals("")) {
+                            alertDialogExit.setMessage(inputMessage.obj.toString());
+                        } else {
+                            alertDialogExit.setMessage("为了更好的使用体验，请重新下载安装最新版本，下载地址请关注“小牛快淘”微信公众号，回复“最新版本”即可。");
+                        }
                         alertDialogExit.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -184,7 +188,11 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
 
                     Log.d("WebView", "Current version is " + Global.version + " New version is " + json.getString("message"));
                     if (Global.version < Integer.valueOf(json.getString("min"))) {
-                        Message message = Global.m.mHandler.obtainMessage(2);
+                        String notiStr = "";
+                        if (json.getString("min") != null && !json.getString("min").equals("")) {
+                            notiStr = json.getString("min");
+                        }
+                        Message message = Global.m.mHandler.obtainMessage(2, notiStr);
                         message.sendToTarget();
                     }else if (Global.version < Integer.valueOf(json.getString("message"))) {
                         Message message = Global.m.mHandler.obtainMessage(1);
