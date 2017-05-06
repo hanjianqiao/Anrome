@@ -189,8 +189,8 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     Log.d("WebView", "Current version is " + Global.version + " New version is " + json.getString("message"));
                     if (Global.version < Integer.valueOf(json.getString("min"))) {
                         String notiStr = "";
-                        if (json.getString("min") != null && !json.getString("min").equals("")) {
-                            notiStr = json.getString("min");
+                        if (json.getString("upinfo") != null && !json.getString("upinfo").equals("")) {
+                            notiStr = json.getString("upinfo");
                         }
                         Message message = Global.m.mHandler.obtainMessage(2, notiStr);
                         message.sendToTarget();
