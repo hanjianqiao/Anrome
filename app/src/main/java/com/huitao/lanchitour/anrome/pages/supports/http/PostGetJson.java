@@ -61,7 +61,7 @@ public class PostGetJson {
 
             String output;
             String stringToParse = "";
-            System.out.println("Output from Server .... \n");
+            System.out.println("Output from Server .... "+address+":\n");
             while ((output = br.readLine()) != null) {
                 stringToParse += output;
                 System.out.println(output);

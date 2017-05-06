@@ -60,6 +60,6 @@ function doWork(isVip){
     var activity = get('activity');
     if(activity == null) activity = '0';
     if(activity == '0' && catalog == '0') activity = '5';
-	htmlText = LanJsBridge.getDataFromUrl("http://shop.vsusvip.com:7010/search?catalog="+catalog+"&activity="+activity, "callBack")
+	htmlText = LanJsBridge.getDataFromUrl("http://shop.vsusvip.com:7011/search?catalog="+catalog+"&activity="+activity, "callBack")
 	callBack(htmlText, "");
 }

@@ -1,6 +1,7 @@
 package com.huitao.lanchitour.anrome;
 
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -56,7 +57,7 @@ public class Global {
         boolean YE = (uendYear == (calendar.get(Calendar.YEAR)));
         boolean M = (uendMonth < calendar.get(Calendar.MONTH));
         boolean ME = (uendMonth == (calendar.get(Calendar.MONTH)));
-        boolean D = (uendDay < calendar.get(Calendar.DAY_OF_MONTH));
+        boolean D = (uendDay <= calendar.get(Calendar.DAY_OF_MONTH));
         Log.d("WebView", "u" + Y + YE + M + ME + D);
         return !(Y || (YE && M) || (YE && ME && D));
     }
@@ -67,11 +68,35 @@ public class Global {
         boolean YE = (endYear == (calendar.get(Calendar.YEAR)));
         boolean M = (endMonth < calendar.get(Calendar.MONTH));
         boolean ME = (endMonth == (calendar.get(Calendar.MONTH)));
-        boolean D = (endDay < calendar.get(Calendar.DAY_OF_MONTH));
+        boolean D = (endDay <= calendar.get(Calendar.DAY_OF_MONTH));
         Log.d("WebView", "" + Y + YE + M + ME + D);
         return !(Y || (YE && M) || (YE && ME && D));
     }
-
+    public static void update() throws Exception {
+        JSONObject jsonData = new JSONObject();
+        jsonData.put("user_id", Global.username);
+        jsonData.put("password", Global.password);
+        jsonData.put("uuid", UUID.randomUUID().toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/login1", jsonData.toString());
+        if (jo == null) {
+            return;
+        }
+        if (jo.getString("status").equals("ok")) {
+            JSONObject userInfo = new JSONObject(jo.getString("data"));
+            Global.parent = userInfo.getString("parent");
+            Global.username = userInfo.getString("user_id");
+            Global.isLoggedIn = true;
+            Global.level = userInfo.getString("level");
+            Global.endYear = Integer.valueOf(userInfo.getString("expire_year"));
+            Global.endMonth = Integer.valueOf(userInfo.getString("expire_month"));
+            Global.endDay = Integer.valueOf(userInfo.getString("expire_day"));
+            Global.uendYear = Integer.valueOf(userInfo.getString("uexpire_year"));
+            Global.uendMonth = Integer.valueOf(userInfo.getString("uexpire_month"));
+            Global.uendDay = Integer.valueOf(userInfo.getString("uexpire_day"));
+            return;
+        }
+        return;
+    }
     public static void start(final MainActivity m) {
         Global.m = m;
         final Runnable beeper = new Runnable() {
@@ -100,6 +125,11 @@ public class Global {
                 }
                 Calendar calendar = Calendar.getInstance();
                 Log.d("WebView", "" + calendar.get(Calendar.DAY_OF_MONTH));
+                try {
+                    update();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         beeperHandle = scheduler.scheduleAtFixedRate(beeper, 10, 60, SECONDS);

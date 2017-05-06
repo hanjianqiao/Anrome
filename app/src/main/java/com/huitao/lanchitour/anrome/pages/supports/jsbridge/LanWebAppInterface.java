@@ -336,7 +336,7 @@ public class LanWebAppInterface {
         alertDialog.setTitle("正在登录...");
         alertDialog.setMessage("");
         alertDialog.show();
-        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/login0", jsonData.toString());
+        JSONObject jo = PostGetJson.httpsPostGet("https://user.vsusvip.com:10000/login1", jsonData.toString());
         alertDialog.dismiss();
         if (jo == null) {
             return "网络异常";

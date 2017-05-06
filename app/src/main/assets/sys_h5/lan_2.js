@@ -56,6 +56,6 @@ function callBack(html, url){
 function doWork(q){
     searchKey = LanJsBridge.decodeURLIfBeginWithPercent(q);
 	target = document.getElementsByClassName('product-list')[0];
-	htmlText = LanJsBridge.getDataFromUrl("http://self.vsusvip.com:7008/search"+searchKey, "callBack");
+	htmlText = LanJsBridge.getDataFromUrl("http://self.vsusvip.com:7080/search"+searchKey, "callBack");
 	callBack(htmlText, "");
 }

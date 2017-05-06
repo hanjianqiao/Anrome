@@ -24,6 +24,6 @@ function callBack(html, url){
 function doWork(q, isVip){
     showIt = isVip;
 	//LanJsBridge.getDataFromUrl("https://shop.vsusvip.com:30002/query?id="+get('id'), "callBack")
-	htmlText = LanJsBridge.getDataFromUrl("http://shop.vsusvip.com:7010/query?id="+q, "callBack")
+	htmlText = LanJsBridge.getDataFromUrl("http://shop.vsusvip.com:7011/query?id="+q, "callBack")
 	callBack(htmlText, "");
 }
