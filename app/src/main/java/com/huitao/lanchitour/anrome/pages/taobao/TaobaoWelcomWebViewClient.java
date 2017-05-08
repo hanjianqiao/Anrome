@@ -1,7 +1,9 @@
 package com.huitao.lanchitour.anrome.pages.taobao;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -9,6 +11,8 @@ import android.webkit.WebViewClient;
 import com.huitao.lanchitour.anrome.MainActivity;
 
 import java.net.URLDecoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by hanji on 2016/11/6.
@@ -36,13 +40,28 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
             view.loadUrl(newUrl);
             return false;
         } else if (url.startsWith("ios:?q=")) {
-            view.stopLoading();
             Log.d("WebView", url);
             String newUrl;
-            if (url.startsWith("ios:?q=http://")) {
-                newUrl = url.substring(7);
-            } else if (url.startsWith("ios:?q=https://")) {
-                newUrl = url.substring(7);
+            if (url.startsWith("ios:?q=http")) {
+                Pattern pattern1 = Pattern.compile("http.+\\?");
+                Pattern pattern2 = Pattern.compile("id=\\d+");
+                Matcher matcher1 = pattern1.matcher(url);
+                Matcher matcher2 = pattern2.matcher(url);
+                if (!matcher1.find() || !matcher2.find()) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(m).create();
+                    alertDialog.setTitle("不正确的商品地址");
+                    alertDialog.setMessage("");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return true;
+                }
+                newUrl = matcher1.group(0) + matcher2.group(0);
+                Log.d("Webview", "taobao new url: " + newUrl);
             } else {
                 newUrl = "https://s.m.taobao.com/h5" + url.substring(4);
             }
@@ -52,7 +71,7 @@ public class TaobaoWelcomWebViewClient extends WebViewClient {
             TaobaoMain f = new TaobaoMain();
             f.setArguments(args);
             m.showFragment(f);
-            return false;
+            return true;
         }
         return true;
     }
