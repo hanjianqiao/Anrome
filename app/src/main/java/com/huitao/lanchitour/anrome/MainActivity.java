@@ -46,6 +46,7 @@ import com.huitao.lanchitour.anrome.pages.taobao.TaobaoWelcome;
 import com.huitao.lanchitour.anrome.pages.user.UserCenter;
 import com.jetradar.multibackstack.BackStackActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -189,8 +190,12 @@ public class MainActivity extends BackStackActivity implements BottomNavigationB
                     Log.d("WebView", "Current version is " + Global.version + " New version is " + json.getString("message"));
                     if (Global.version < Integer.valueOf(json.getString("min"))) {
                         String notiStr = "";
-                        if (json.getString("upinfo") != null && !json.getString("upinfo").equals("")) {
-                            notiStr = json.getString("upinfo");
+                        try {
+                            if (json.getString("upinfo") != null && !json.getString("upinfo").equals("")) {
+                                notiStr = json.getString("upinfo");
+                            }
+                        } catch (JSONException e) {
+                            Log.d("WebView", e.getMessage());
                         }
                         Message message = Global.m.mHandler.obtainMessage(2, notiStr);
                         message.sendToTarget();
