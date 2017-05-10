@@ -30,23 +30,27 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Log.d("WebView", "Redirect to " + URLDecoder.decode(url));
         if (url.startsWith("alimama")) {
-            view.stopLoading();
             Bundle args = new Bundle();
             args.putString(TaobaoAlimamaLogin.ARG_ITEM, "http://shop.vsusvip.com:3123/fate_login_alimama.html");
             TaobaoAlimamaLogin f = new TaobaoAlimamaLogin();
             f.setArguments(args);
             m.showFragment(f);
-            return false;
-            //view.loadUrl(url);
+            return true;
         } else if (url.startsWith("logintaobao")) {
-            view.stopLoading();
             Bundle args = new Bundle();
             args.putString(TaobaoAlimamaLogin.ARG_ITEM, "https://login.m.taobao.com/login.htm");
             TaobaoAlimamaLogin f = new TaobaoAlimamaLogin();
             f.setArguments(args);
             m.showFragment(f);
-            return false;
+            return true;
             //view.loadUrl(url);
+        } else if (url.startsWith("webpage:")) {
+            Bundle args = new Bundle();
+            args.putString(TaobaoWebpage.ARG_ITEM, url.substring(8));
+            TaobaoWebpage f = new TaobaoWebpage();
+            f.setArguments(args);
+            m.showFragment(f);
+            return true;
         } else if (url.startsWith("intent")) {
             String decodedUrl = URLDecoder.decode(url);
             String newUrl = decodedUrl.substring(decodedUrl.indexOf("http"), decodedUrl.indexOf(";end"));
