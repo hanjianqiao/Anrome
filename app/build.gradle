@@ -7,8 +7,8 @@ android {
         applicationId 'com.huitao.lanchitour.anrome'
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 31
-        versionName "2.0.2"
+        versionCode 32
+        versionName "2.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
