@@ -1,7 +1,6 @@
 package com.huitao.lanchitour.anrome;
 
 import android.os.Message;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -55,22 +54,35 @@ public class Global {
         Calendar calendar = Calendar.getInstance();
         boolean Y = (uendYear < calendar.get(Calendar.YEAR));
         boolean YE = (uendYear == (calendar.get(Calendar.YEAR)));
-        boolean M = (uendMonth < calendar.get(Calendar.MONTH));
-        boolean ME = (uendMonth == (calendar.get(Calendar.MONTH)));
+        boolean M = (uendMonth < calendar.get(Calendar.MONTH) + 1);
+        boolean ME = (uendMonth == (calendar.get(Calendar.MONTH)) + 1);
         boolean D = (uendDay <= calendar.get(Calendar.DAY_OF_MONTH));
         Log.d("WebView", "u" + Y + YE + M + ME + D);
-        return !(Y || (YE && M) || (YE && ME && D));
+        if (Y || (YE && M) || (YE && ME && D)) {
+            Log.d("WebView", "not vip");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public static boolean isVip() {
         Calendar calendar = Calendar.getInstance();
         boolean Y = (endYear < calendar.get(Calendar.YEAR));
         boolean YE = (endYear == (calendar.get(Calendar.YEAR)));
-        boolean M = (endMonth < calendar.get(Calendar.MONTH));
-        boolean ME = (endMonth == (calendar.get(Calendar.MONTH)));
+        boolean M = (endMonth < calendar.get(Calendar.MONTH) + 1);
+        boolean ME = (endMonth == (calendar.get(Calendar.MONTH)) + 1);
         boolean D = (endDay <= calendar.get(Calendar.DAY_OF_MONTH));
+        Log.d("WebView", "YEAR: " + calendar.get(Calendar.YEAR));
+        Log.d("WebView", "Month: " + calendar.get(Calendar.MONTH));
+        Log.d("WebView", "DAY_OF_MONTH: " + calendar.get(Calendar.DAY_OF_MONTH));
         Log.d("WebView", "" + Y + YE + M + ME + D);
-        return !(Y || (YE && M) || (YE && ME && D));
+        if (Y || (YE && M) || (YE && ME && D)) {
+            Log.d("WebView", "not vip");
+            return false;
+        } else {
+            return true;
+        }
     }
     public static void update() throws Exception {
         JSONObject jsonData = new JSONObject();
