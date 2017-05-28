@@ -197,7 +197,9 @@ public class LanWebAppInterface {
                 Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
             } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
                 Toast.makeText(mContext, "您的网络质量低，请稍后再试", Toast.LENGTH_SHORT).show();
-            } else {
+            } else if (e.toString().startsWith("java.io.FileNotFoundException")){
+
+            }else{
                 Toast.makeText(mContext, "您的网络可能存在问题，请稍后再试", Toast.LENGTH_SHORT).show();
             }
             Log.d("WebView", e.toString());
@@ -248,6 +250,8 @@ public class LanWebAppInterface {
                 Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
             } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
                 Toast.makeText(mContext, "您的网络质量低，请稍后再试", Toast.LENGTH_SHORT).show();
+            } else if (e.toString().startsWith("java.io.FileNotFoundException")){
+
             } else {
                 Toast.makeText(mContext, "您的网络可能存在问题，请稍后再试", Toast.LENGTH_SHORT).show();
             }
