@@ -192,7 +192,7 @@ public class LanWebAppInterface {
             inStream.close();
             str = new String(outStream.toByteArray(), encodingType);//通过out.Stream.toByteArray获取到写的数据
             Log.d("webview from" + address, str);
-        } catch (SocketTimeoutException e) {
+        } catch (Exception e) {
             if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
                 Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
             } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
@@ -243,7 +243,7 @@ public class LanWebAppInterface {
             inStream.close();
             str = new String(outStream.toByteArray(), encodingType);//通过out.Stream.toByteArray获取到写的数据
             Log.d("webview from" + address, str);
-        } catch (SocketTimeoutException e) {
+        } catch (Exception e) {
             if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
                 Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
             } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {

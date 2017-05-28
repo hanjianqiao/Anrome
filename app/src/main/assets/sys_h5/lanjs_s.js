@@ -317,7 +317,9 @@ function updateTKZSCouponCallBack(htmlText, url){
 function updateTKZSCoupon(){
     LanJsBridge.getDataFromUrl("http://zhushou3.taokezhushou.com/api/v1/getdata?itemid="+goodid+"&version=3.5.2", "callBackNull");
     htmlText = LanJsBridge.getDataFromUrl("http://zhushou3.taokezhushou.com/api/v1/coupons_base/"+userid+"?item_id="+goodid, "updateTKZSCouponCallBack");
-    updateTKZSCouponCallBack(htmlText, "");
+    if(htmlText != ''){
+        updateTKZSCouponCallBack(htmlText, "");
+    }
 }
 
 // Dataoke coupon
