@@ -35,7 +35,7 @@
 			var nums = parseInt(str, 10);
 			if(nums >= 24) return;
 			nums = nums + 1;
-			var price = 138 * nums;
+			var price = 198 * nums;
             document.getElementById("nums").innerHTML = nums.toString();
             document.getElementById("price").innerHTML = price.toString();
 		}
@@ -44,7 +44,7 @@
 			var nums = parseInt(str, 10);
 			if(nums <= 1) return;
 			nums = nums - 1;
-			var price = 138 * nums;
+			var price = 198 * nums;
             document.getElementById("nums").innerHTML = nums.toString();
             document.getElementById("price").innerHTML = price.toString();
 		}
@@ -73,7 +73,7 @@
 
             <div class="price">
                 <p class="fl">金额：</p>
-                <p class="fl  color-price">￥<span id="price">138</span></p>
+                <p class="fl  color-price">￥<span id="price">198</span></p>
             </div>
         </div>
         <button id="extendbt" class="btn02" onclick="extend();">确认支付</button>
@@ -88,7 +88,7 @@
 </body>
 <script>
     function updateDisplay(a, b, c){
-        document.getElementById("price").innerHTML = "138";
+        document.getElementById("price").innerHTML = "198";
     }
 
 
