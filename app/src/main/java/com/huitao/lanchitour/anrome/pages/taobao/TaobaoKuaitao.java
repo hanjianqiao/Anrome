@@ -46,6 +46,7 @@ public class TaobaoKuaitao extends Fragment {
         bt_copy_token.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("WebView", "copytoken target: "+target);
                 mainView.post(new Runnable() {
                     @Override
                     public void run() {
