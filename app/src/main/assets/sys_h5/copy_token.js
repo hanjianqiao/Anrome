@@ -1,6 +1,6 @@
 function copyToken(any){
     var ret = "";
-    if(location.href.startsWith('http://pub.alimama.com/myunion.htm')){
+    if(location.href.substring(0, 34) == 'http://pub.alimama.com/myunion.htm'){
         var holder = document.getElementsByClassName('tab-content')[0].children;
         for(var i = 0; i < holder.length; i++){
             var item = holder[i];
@@ -10,7 +10,7 @@ function copyToken(any){
             }
         }
         LanJsBridge.setClipboard(ret);
-    }else if(location.href.startsWith('http://pub.alimama.com/promo')){
+    }else if(location.href.substring(0, 28) == 'http://pub.alimama.com/promo'){
         var tokens = document.getElementsByClassName("code-wrap-s");
         var tokenl = document.getElementsByClassName("code-wrap-l");
         for(var i = 0; i < tokens.length; i++){
