@@ -11,6 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
+import com.huitao.lanchitour.anrome.Global;
 import com.huitao.lanchitour.anrome.MainActivity;
 import com.huitao.lanchitour.anrome.R;
 import com.huitao.lanchitour.anrome.pages.supports.jsbridge.LanWebAppInterface;
@@ -38,7 +39,7 @@ public class TaobaoMain extends Fragment {
         bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainView.loadUrl("http://www.alimama.com");
+                mainView.loadUrl(Global.alimamaUrl);
             }
         });
         bt_kuaitao.setOnClickListener(new View.OnClickListener() {

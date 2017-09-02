@@ -49,6 +49,7 @@ public class Global {
     public static BottomNavigationItem shop;
     public static BottomNavigationItem self;
     public static BottomNavigationItem user;
+    public static String alimamaUrl = "http://pub.alimama.com";
 
     public static boolean upisVip() {
         Calendar calendar = Calendar.getInstance();
