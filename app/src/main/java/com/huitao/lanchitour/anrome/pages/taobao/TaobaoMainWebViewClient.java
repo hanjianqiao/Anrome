@@ -27,6 +27,8 @@ public class TaobaoMainWebViewClient extends WebViewClient {
             if (view.getUrl() != null) {
                 if (view.getUrl().startsWith("http://h5.m.taobao.com/awp/core/detail.htm?") || view.getUrl().startsWith("https://item.taobao.com/item.htm?id=")) {
                     return true;
+                }else{
+                    return false;
                 }
             }
             if (url.startsWith("taobao://h5.m.taobao.com/awp/core/detail.htm?")) {

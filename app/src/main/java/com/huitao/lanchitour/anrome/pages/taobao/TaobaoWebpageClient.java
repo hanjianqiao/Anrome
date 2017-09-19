@@ -23,7 +23,7 @@ public class TaobaoWebpageClient extends WebViewClient {
 
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         try {
-            Log.d("WebView", "Redirect to " + URLDecoder.decode(url, "UTF-8"));
+            Log.d("WebView", "taobao Redirect to " + URLDecoder.decode(url, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -32,7 +32,7 @@ public class TaobaoWebpageClient extends WebViewClient {
 
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        Log.d("WebView", "onPageStarted:" + url);
+        Log.d("WebView", "taobao onPageStarted:" + url);
     }
 
     public void onPageFinished(WebView view, String url) {
@@ -46,6 +46,6 @@ public class TaobaoWebpageClient extends WebViewClient {
 //            }
 //        });
         //c.tv_url.setText(url, TextView.BufferType.NORMAL);
-        Log.d("WebView", "onPageFinished:" + url);
+        Log.d("WebView", "taobao onPageFinished:" + url);
     }
 }

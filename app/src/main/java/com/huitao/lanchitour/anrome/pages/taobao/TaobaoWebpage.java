@@ -3,6 +3,7 @@ package com.huitao.lanchitour.anrome.pages.taobao;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class TaobaoWebpage extends Fragment {
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
         mainView.setWebViewClient(new TaobaoWebpageClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
+        Log.d("Webview", "taobao load to " + target);
         mainView.loadUrl(target);
 
         return v;
