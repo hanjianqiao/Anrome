@@ -7,7 +7,7 @@
         <item name="actionBarStyle">@style/Theme.MultiBackStack.ActionBar</item>
     </style>
 
-    <style name="Theme.MultiBackStack.ActionBar" parent="style/Widget.AppCompat.ActionBar.Solid">
+    <style name="Theme.MultiBackStack.ActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="elevation">4dp</item>
     </style>
     <!-- Base application theme. -->
