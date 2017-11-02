@@ -93,7 +93,7 @@ function updateGeneralBrokerageItem2CallBack(htmlText, url){
             }
         }catch(err){}
     }catch(err){
-        document.getElementById("plantitle").innerHTML = "请<a href=loginalimama:show style=\"color:red\"><b>登陆</b></a>后查看详情<br>若您已登陆，则访问受限，请稍后再试。";
+        document.getElementById("plantitle").innerHTML = "请<a href=alimama:login style=\"color:red\"><b>登陆</b></a>后查看详情<br>若您已登陆，则访问受限，请稍后再试。";
     }
 }
 
