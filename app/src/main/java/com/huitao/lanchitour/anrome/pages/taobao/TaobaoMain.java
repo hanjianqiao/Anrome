@@ -39,7 +39,11 @@ public class TaobaoMain extends Fragment {
         bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainView.loadUrl(Global.alimamaUrl);
+                Bundle args = new Bundle();
+                args.putString(AlimamaLogin.ARG_ITEM, Global.alimamaUrl);
+                AlimamaLogin f = new AlimamaLogin();
+                f.setArguments(args);
+                ((MainActivity) getActivity()).showFragment(f);
             }
         });
         bt_kuaitao.setOnClickListener(new View.OnClickListener() {

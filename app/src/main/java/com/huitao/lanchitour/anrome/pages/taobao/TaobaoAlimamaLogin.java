@@ -56,6 +56,10 @@ public class TaobaoAlimamaLogin extends Fragment {
         mainView.getSettings().setLoadWithOverviewMode(true);
         mainView.setScaleX(1.0f);
 
+        // desktop
+        String newUA= "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
+        mainView.getSettings().setUserAgentString(newUA);
+
         mainView.addJavascriptInterface(new LanWebAppInterface(this.getContext()), "LanJsBridge");
         mainView.setWebViewClient(new TaobaoAlimamaLoginClient((MainActivity) getActivity()));
         mainView.setInitialScale(25);
