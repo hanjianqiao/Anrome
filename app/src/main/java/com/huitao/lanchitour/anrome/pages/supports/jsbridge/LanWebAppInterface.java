@@ -358,7 +358,7 @@ public class LanWebAppInterface {
             Global.uendYear = Integer.valueOf(userInfo.getString("uexpire_year"));
             Global.uendMonth = Integer.valueOf(userInfo.getString("uexpire_month"));
             Global.uendDay = Integer.valueOf(userInfo.getString("uexpire_day"));
-            if(userInfo.getString("alimamaurl") != null){
+            if(userInfo.has("alimamaurl")){
                 Global.alimamaUrl = userInfo.getString("alimamaurl");
             }
             return "ok";
