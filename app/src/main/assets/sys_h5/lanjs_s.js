@@ -332,20 +332,21 @@ function updateTKZSCoupon2Item(sellerId, activityId){
 
 function updateTKZSCouponCallBack(htmlText, url){
     var obj = eval('('+htmlText+')');
-    var ja = obj.data;
+    var ja = obj.dataList;
     if(Object.keys(ja).length == 0){
         //document.getElementById("lanTKZtic").innerHTML="<caption>没有优惠券</caption><tr style=\"background: #fe2641; color:#fff;\"><th>优惠券</th><th>使用时间</th><th>手机券</th></tr>";
         return;
     }
     for(var i = 0; i < ja.length; i++){
-        var activityId = ja[i].activity_id;
+        var activityId = ja[i].activityId;
         updateTKZSCoupon2Item(userid, activityId);
     }
 }
 
 function updateTKZSCoupon(){
-    LanJsBridge.getDataFromUrl("http://zhushou3.taokezhushou.com/api/v1/getdata?itemid="+goodid+"&version=3.5.2", "callBackNull");
-    htmlText = LanJsBridge.getDataFromUrl("http://zhushou3.taokezhushou.com/api/v1/coupons_base/"+userid+"?item_id="+goodid, "updateTKZSCouponCallBack");
+    LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/tip?version=6.0.0.0", "callBackNull");
+    htmlText = LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/coupon?sellerId="+userid+"&itemId="+goodid, "updateTKZSCouponCallBack");
+    //htmlText = LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/coupons_base/"+userid+"?item_id="+goodid, "updateTKZSCouponCallBack");
     if(htmlText != ''){
         updateTKZSCouponCallBack(htmlText, "");
     }
