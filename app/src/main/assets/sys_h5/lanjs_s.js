@@ -132,7 +132,7 @@ function updateGeneralBrokerageCallBack(htmlText, url){
                 document.getElementById("coupontable").appendChild(item);
             }catch(err){
             }
-            updateGeneralBrokerageItem2(goodid);
+            updateGeneralBrokerageItem(userid);
         }
     }
 }
@@ -453,13 +453,29 @@ function doWork(srcUrl, showit){
     goodid = getGoodID(srcUrl);
 
     //tbtoken = LanJsBridge.getCookie("_tb_token_", "http://pub.alimama.com/")
+    try{
+        updateGeneralBrokerage();
+    }catch(e){}
 
-    updateGeneralBrokerage();
-    updateQueqiaoBrokerage();
-    updateTaobaoCoupon();
-    updateTKZSCoupon();
-    updateDataokeCoupon();
-    updateQingtaokeCoupon();
+    try{
+        updateQueqiaoBrokerage();
+    }catch(e){}
+
+    try{
+        updateTaobaoCoupon();
+    }catch(e){}
+
+    try{
+        updateTKZSCoupon();
+    }catch(e){}
+
+    try{
+        updateDataokeCoupon();
+    }catch(e){}
+
+    try{
+        updateQingtaokeCoupon();
+    }catch(e){}
 }
 
 
