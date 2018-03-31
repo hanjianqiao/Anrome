@@ -175,7 +175,9 @@ public class LanWebAppInterface {
             conn.setReadTimeout(10000);
             conn.setRequestProperty("Cookie", newCookie);
             InputStream inStream = conn.getInputStream();
-            if (conn.getHeaderField("Content-Type").contains("GBK")) {
+            if (conn.getHeaderField("Content-Type") == null){
+                encodingType = "UTF-8";
+            }else if (conn.getHeaderField("Content-Type").contains("GBK")) {
                 encodingType = "GBK";
             }
             Map<String, List<String>> allHeaderFileds = conn.getHeaderFields();
@@ -193,6 +195,7 @@ public class LanWebAppInterface {
             str = new String(outStream.toByteArray(), encodingType);//通过out.Stream.toByteArray获取到写的数据
             Log.d("webview from" + address, str);
         } catch (Exception e) {
+            Log.d("UrlErr", address);
             if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
                 Toast.makeText(mContext, "您的网络暂时不稳定，请稍后再试", Toast.LENGTH_SHORT).show();
             } else if (e.toString().equals("java.net.SocketTimeoutException: timeout")) {
@@ -229,7 +232,9 @@ public class LanWebAppInterface {
             conn.setRequestProperty("Cookie", newCookie);
             conn.setRequestProperty("Referer", refer);
             InputStream inStream = conn.getInputStream();
-            if (conn.getHeaderField("Content-Type").contains("GBK")) {
+            if (conn.getHeaderField("Content-Type") == null){
+                encodingType = "UTF-8";
+            }else if (conn.getHeaderField("Content-Type").contains("GBK")) {
                 encodingType = "GBK";
             }
             Map<String, List<String>> allHeaderFileds = conn.getHeaderFields();
