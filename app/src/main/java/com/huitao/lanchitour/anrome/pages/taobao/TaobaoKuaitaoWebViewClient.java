@@ -83,7 +83,8 @@ public class TaobaoKuaitaoWebViewClient extends WebViewClient {
         super.onPageFinished(view, url);
         TextView title = (TextView) m.findViewById(R.id.taobao_kuaitao_title);
         if (url.endsWith("kuaitao.html")) {
-            if ((target.indexOf("h5.m.taobao.com/awp/core/detail.htm") > 0) || (target.indexOf("detail.m.tmall.com/item.htm") > 0) || (target.indexOf("detail.m.liangxinyao.com/item.htm") > 0)) {
+            if ((target.indexOf("h5.m.taobao.com/awp/core/detail.htm") > 0) || (target.indexOf("detail.m.tmall.com/item.htm") > 0)
+                    || (target.indexOf("detail.m.liangxinyao.com/item.htm") > 0)  || target.indexOf("?id=") > 0) {
                 if (Global.isVip()) {
                     title.setText(R.string.kuaitaoyixia);
                 } else {
