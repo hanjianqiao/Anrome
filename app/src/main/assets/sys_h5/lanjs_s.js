@@ -38,11 +38,12 @@ function updateBrokerageAcrateItemCallback(htmlText, url){
 }
 
 function updateBrokerageAcrateItem(campaignId, shopKeeperId, sellerId){
-    htmlText = LanJsBridge.getDataFromUrl("http://pub.alimama.com/campaign/merchandiseDetail.json?campaignId="+campaignId+"&shopkeeperId="+shopKeeperId+"&userNumberId="+sellerId+"&tab=2&omid="+sellerId+"&toPage=1&perPagesize=10&_input_charset=utf-8", "updateBrokerageItemCallback");
+    htmlText = LanJsBridge.getDataFromUrl("https://pub.alimama.com/campaign/merchandiseDetail.json?campaignId="+campaignId+"&shopkeeperId="+shopKeeperId+"&userNumberId="+sellerId+"&tab=2&omid="+sellerId+"&toPage=1&perPagesize=10&_input_charset=utf-8", "updateBrokerageItemCallback");
     updateBrokerageAcrateItemCallback(htmlText, "");
 }
 
 function updateGeneralBrokerageItemCallBack(htmlText, url){
+    console.log("lanchitour");
     try{
         var obj = JSON.parse(htmlText);
         try{
@@ -56,8 +57,8 @@ function updateGeneralBrokerageItemCallBack(htmlText, url){
                 }else{
                     innerText += "</td><td id=\"camp_"+jo.campaignId+"\" style=\"color:#fe2641\">" + jo.avgCommissionToString + "</td><td>";
                 }
-                //innerText += "<a href=\"http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1\"";
-                innerText += "<a href=\"http://pub.alimama.com/myunion.htm?#!/promo/self/campaign?campaignId="+jo.campaignId+"&shopkeeperId="+jo.shopKeeperId+"&userNumberId="+userid+"\"";
+                //innerText += "<a href=\"https://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1\"";
+                innerText += "<a href=\"https://pub.alimama.com/myunion.htm?#!/promo/self/campaign?campaignId="+jo.campaignId+"&shopkeeperId="+jo.shopKeeperId+"&userNumberId="+userid+"\"";
                 innerText += "<button class=\"btn_02\">申请计划</button></a></td>";
                 var item = document.createElement("tr");
                 item.innerHTML = innerText;
@@ -70,7 +71,7 @@ function updateGeneralBrokerageItemCallBack(htmlText, url){
 }
 
 function updateGeneralBrokerageItem(memberId){
-    htmlText = LanJsBridge.getDataFromUrl("http://pub.alimama.com/shopdetail/campaigns.json?oriMemberId="+memberId, "updateGeneralBrokerageItemCallBack");
+    htmlText = LanJsBridge.getDataFromUrl("https://pub.alimama.com/shopdetail/campaigns.json?oriMemberId="+memberId, "updateGeneralBrokerageItemCallBack");
     updateGeneralBrokerageItemCallBack(htmlText, "");
 }
 
@@ -85,8 +86,8 @@ function updateGeneralBrokerageItem2CallBack(htmlText, url){
                 var jo = ja[i];
                 innerText += "<td>" + jo.CampaignName+ "</td><td>" + jo.Properties;
                     innerText += "</td><td id=\"camp_"+jo.CampaignID+"\" style=\"color:#fe2641\">" + jo.commissionRate + "%</td><td>";
-                //innerText += "<a href=\"http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1\"";
-                innerText += "<a href=\"http://pub.alimama.com/myunion.htm?#!/promo/self/campaign?campaignId="+jo.CampaignID+"&shopkeeperId="+jo.ShopKeeperID+"&userNumberId="+userid+"\"";
+                //innerText += "<a href=\"https://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1\"";
+                innerText += "<a href=\"https://pub.alimama.com/myunion.htm?#!/promo/self/campaign?campaignId="+jo.CampaignID+"&shopkeeperId="+jo.ShopKeeperID+"&userNumberId="+userid+"\"";
                 innerText += "<button class=\"btn_02\">申请计划</button></a></td>";
                 var item = document.createElement("tr");
                 item.innerHTML = innerText;
@@ -99,47 +100,54 @@ function updateGeneralBrokerageItem2CallBack(htmlText, url){
 }
 
 function updateGeneralBrokerageItem2(goodId){
-    htmlText = LanJsBridge.getDataFromUrl("http://pub.alimama.com/pubauc/getCommonCampaignByItemId.json?itemId="+goodId, "updateGeneralBrokerageItem2CallBack");
+    htmlText = LanJsBridge.getDataFromUrl("https://pub.alimama.com/pubauc/getCommonCampaignByItemId.json?itemId="+goodId, "updateGeneralBrokerageItem2CallBack");
     updateGeneralBrokerageItem2CallBack(htmlText, "");
 }
 
 function updateGeneralBrokerageCallBack(htmlText, url){
-    var obj = eval('('+htmlText+')');
-    if(obj.data.head.status == "NORESULT"){
-        document.getElementById("genbrorate").innerHTML="0%";
-        document.getElementById("days30sell").innerHTML="0";
-        document.getElementById("givebro").innerHTML = "0";
-        document.getElementById("plantitle").innerHTML="没有计划";
-    }else{
-        var dataList = obj.data.pageList[0];
-        document.getElementById("genbrorate").innerHTML = (showIt ? dataList.tkRate : "??")+"%";
-        document.getElementById("days30sell").innerHTML = (showIt ? dataList.totalNum : "??");
-        document.getElementById("givebro").innerHTML = (showIt ? dataList.totalFee : "??");
-        userid = dataList.sellerId;
-        spTkRates = dataList.tkSpecialCampaignIdRateMap;
-        tkRate = dataList.tkRate;
-        if(showIt){
-            try{
-                var innerText = "";
-                innerText += "<td>";
-                innerText += dataList.couponInfo;
-                innerText += "</td><td>";
-                innerText += dataList.couponEffectiveEndTime;
-                innerText += "</td><td>";
-                innerText += "后台推广可见";
-                innerText += "</td>";
-                var item = document.createElement("tr");
-                item.innerHTML = innerText;
-                document.getElementById("coupontable").appendChild(item);
-            }catch(err){
+    try{
+        var obj = eval('('+htmlText+')');
+        if(obj.data.head.status == "NORESULT"){
+            document.getElementById("genbrorate").innerHTML="0%";
+            document.getElementById("days30sell").innerHTML="0";
+            document.getElementById("givebro").innerHTML = "0";
+            document.getElementById("plantitle").innerHTML="没有计划";
+        }else{
+            var dataList = obj.data.pageList[0];
+            document.getElementById("genbrorate").innerHTML = (showIt ? dataList.tkRate : "??")+"%";
+            document.getElementById("days30sell").innerHTML = (showIt ? dataList.totalNum : "??");
+            document.getElementById("givebro").innerHTML = (showIt ? dataList.totalFee : "??");
+            userid = dataList.sellerId;
+            spTkRates = dataList.tkSpecialCampaignIdRateMap;
+            tkRate = dataList.tkRate;
+            if(showIt){
+                try{
+                    var innerText = "";
+                    innerText += "<td>";
+                    innerText += dataList.couponInfo;
+                    innerText += "</td><td>";
+                    innerText += dataList.couponEffectiveEndTime;
+                    innerText += "</td><td>";
+                    innerText += "后台推广可见";
+                    innerText += "</td>";
+                    var item = document.createElement("tr");
+                    item.innerHTML = innerText;
+                    document.getElementById("coupontable").appendChild(item);
+                }catch(err){
+                }
+                updateGeneralBrokerageItem(userid);
             }
-            updateGeneralBrokerageItem(userid);
         }
+    }catch(e){
+            document.getElementById("genbrorate").innerHTML="0%";
+            document.getElementById("days30sell").innerHTML="0";
+            document.getElementById("givebro").innerHTML = "0";
+            document.getElementById("plantitle").innerHTML=e;
     }
 }
 
 function updateGeneralBrokerage(){
-    htmlText = LanJsBridge.getDataFromUrl("http://pub.alimama.com/items/search.json?q=https://item.taobao.com/item.htm?id="+goodid+"&perPageSize=50", "updateGeneralBrokerageCallBack");
+    htmlText = LanJsBridge.getDataFromUrl("https://pub.alimama.com/items/search.json?q=https://item.taobao.com/item.htm?id="+goodid+"&perPageSize=50", "updateGeneralBrokerageCallBack");
     updateGeneralBrokerageCallBack(htmlText, "")
 }
 
@@ -183,7 +191,7 @@ function updateQueqiaoBrokerageCallBack(htmlText, url){
     }catch(e){
         document.getElementById("queqiaorate").innerHTML = (showIt ? '0%' : "??%");
     }
-    document.getElementById("genlick").href = (showIt ? ((jo.eventRate || jo.eventRate == '0') ? ("http://pub.alimama.com/promo/item/channel/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&channel=qqhd&yxjh=-1") : ("http://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1")) : "");
+    document.getElementById("genlick").href = (showIt ? ((jo.eventRate || jo.eventRate == '0') ? ("https://pub.alimama.com/promo/item/channel/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&channel=qqhd&yxjh=-1") : ("https://pub.alimama.com/promo/search/index.htm?q=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D"+ goodid+"&yxjh=-1")) : "");
     try {
         if(showIt){
             updateQueqiaoBrokerageItem(goodid);
@@ -195,7 +203,7 @@ function updateQueqiaoBrokerageCallBack(htmlText, url){
 }
 
 function updateQueqiaoBrokerage(){
-    htmlText = LanJsBridge.getDataFromUrl("http://pub.alimama.com/items/search.json?q=https://item.taobao.com/item.htm?id="+goodid+"&perPageSize=50", "updateQueqiaoBrokerageCallBack");
+    htmlText = LanJsBridge.getDataFromUrl("https://pub.alimama.com/items/search.json?q=https://item.taobao.com/item.htm?id="+goodid+"&perPageSize=50", "updateQueqiaoBrokerageCallBack");
     updateQueqiaoBrokerageCallBack(htmlText, "");
 }
 
@@ -345,12 +353,14 @@ function updateTKZSCouponCallBack(htmlText, url){
 }
 
 function updateTKZSCoupon(){
-    LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/tip?version=6.0.0.0", "callBackNull");
-    htmlText = LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/coupon?sellerId="+userid+"&itemId="+goodid, "updateTKZSCouponCallBack");
-    //htmlText = LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/coupons_base/"+userid+"?item_id="+goodid, "updateTKZSCouponCallBack");
-    if(htmlText != ''){
-        updateTKZSCouponCallBack(htmlText, "");
-    }
+    try{
+        LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/tip?version=6.0.0.0", "callBackNull");
+        htmlText = LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/coupon?sellerId="+userid+"&itemId="+goodid, "updateTKZSCouponCallBack");
+        //htmlText = LanJsBridge.getDataFromUrl("http://zhushou4.taokezhushou.com/api/v1/coupons_base/"+userid+"?item_id="+goodid, "updateTKZSCouponCallBack");
+        if(htmlText != ''){
+            updateTKZSCouponCallBack(htmlText, "");
+        }
+    }catch(e){}
 }
 
 // Dataoke coupon
@@ -453,7 +463,7 @@ function doWork(srcUrl, showit){
     }
     goodid = getGoodID(srcUrl);
 
-    //tbtoken = LanJsBridge.getCookie("_tb_token_", "http://pub.alimama.com/")
+    //tbtoken = LanJsBridge.getCookie("_tb_token_", "https://pub.alimama.com/")
     try{
         updateGeneralBrokerage();
     }catch(e){}

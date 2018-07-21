@@ -158,7 +158,7 @@ public class LanWebAppInterface {
 
     @JavascriptInterface
     public String getDataFromUrl(String address, String callback) throws Exception {
-        Log.d("WebView", " from " + address);
+        Log.d("getDataFromUrl", " from " + address);
         //showAlert("fist get: ", address);
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] data = new byte[10240];
@@ -193,7 +193,7 @@ public class LanWebAppInterface {
             }
             inStream.close();
             str = new String(outStream.toByteArray(), encodingType);//通过out.Stream.toByteArray获取到写的数据
-            Log.d("webview from" + address, str);
+            Log.d("getDataFromUrlGet" + address , "content is:" +str);
         } catch (Exception e) {
             Log.d("UrlErr", address);
             if (e.toString().equals("java.net.SocketTimeoutException: connect timed out")) {
@@ -206,7 +206,7 @@ public class LanWebAppInterface {
             }else{
                 Toast.makeText(mContext, "您的网络可能存在问题，请稍后再试", Toast.LENGTH_SHORT).show();
             }
-            Log.d("WebView", e.toString());
+            Log.d("getDataFromUrlErr", e.toString());
         }
         //showAlert("then get: ", str);
         return str;
